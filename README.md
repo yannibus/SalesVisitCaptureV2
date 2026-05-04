@@ -194,12 +194,20 @@ The flow deploys as **Active**, but if you see a newer Draft version in Flow Bui
 ### 4. Assign the `Sales Visits` app
 Grant app visibility either via the permset (already done if step 1 passed) or Profile → Assigned Apps.
 
-### 5. Activate Lightning Record Pages
-Some record pages are deployed but not activated automatically:
-- **Visit Capture Workspace** — Setup → Lightning App Builder → open `Visit Capture Workspace` → **Activation** → "Org Default" (or assign to specific app/profile)
-- **Event page** — if your org uses a different default Event page (e.g. from Sales Cloud SDO), manually drop `vcEventRelatedCaptures` into the Related tab: ⚙️ → Edit Page → drag the component from the Custom palette → Save → Activate
+### 5. Activate the Visit Capture Workspace page
+Setup → Lightning App Builder → open **Visit Capture Workspace** → **Activation** → "Org Default" (or assign to specific app/profile). Without this, opening a Visit Capture still shows the standard layout instead of the 3-tab workspace.
 
-### 6. (Optional) Switch a user to French to test i18n
+### 6. Add the `Visit Captures Linked` component to the Event record page (**mandatory**)
+The package ships the LWC `vcEventRelatedCaptures` but it is **not auto-inserted** on the Event record page your org uses (Salesforce's default Event page cannot be replaced by metadata). You must drop it manually:
+
+1. Open any Event record in your org
+2. Top-right gear ⚙️ → **Edit Page**
+3. In the left palette → **Custom** section → drag **"Visites capturées liées"** (api name `c:vcEventRelatedCaptures`) into the **Related** tab, above the standard Related List
+4. **Save** → **Activate** → assign to "Org Default" (or to the `Sales Visits` app + System Administrator profile)
+
+Without this step, Visit Captures auto-created from Events will exist in the CRM but the user won't see the shortcut from the Event fiche.
+
+### 7. (Optional) Switch a user to French to test i18n
 Setup → Users → User → **Language = French** → logout/login → all UI strings and AI outputs switch to French seamlessly.
 
 ---
