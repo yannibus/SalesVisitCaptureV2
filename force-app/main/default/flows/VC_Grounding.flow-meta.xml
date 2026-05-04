@@ -93,7 +93,7 @@ La transcription a été effectuée avec un LLM non connecté à la valeur méti
         </connector>
         <filterLogic>and</filterLogic>
         <filters>
-            <field>VideoCallId__NotFound</field>
+            <field>VideoCallId</field>
             <operator>EqualTo</operator>
             <value>
                 <elementReference>VC_Input.VideoCall__r.Id</elementReference>

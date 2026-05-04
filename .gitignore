@@ -46,3 +46,21 @@ $RECYCLE.BIN/
 **/__pycache__/
 **/.venv/
 **/venv/
+
+# Tooling & project config (kept local, not published)
+.vscode/
+.husky/
+.cursor/
+.claude/
+.prettierignore
+.prettierrc
+.forceignore
+eslint.config.js
+jest.config.js
+package.json
+package-lock.json
+config/
+scripts/
+
+# Project-local agent guidance (not for public repo)
+CLAUDE.md
