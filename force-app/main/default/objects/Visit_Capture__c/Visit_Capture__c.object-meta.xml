@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>Visit_Capture_Compact</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Capture et enrichissement d&apos;une visite commerciale : intègre la transcription ECI d&apos;un VideoCall In Person Meeting (si présent) OU une saisie standalone, et produit un CR IA soigné en s&apos;appuyant sur le grounding d&apos;un Demo_Context__c.</description>
+    <enableActivities>true</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <externalSharingModel>Private</externalSharingModel>
+    <label>Visit Capture</label>
+    <nameField>
+        <displayFormat>VC-{00000}</displayFormat>
+        <label>Numéro</label>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Visit Captures</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ReadWrite</sharingModel>
+    <visibility>Public</visibility>
+</CustomObject>

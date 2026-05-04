@@ -1,0 +1,603 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Translations xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customApplications>
+        <label>Visites commerciales</label>
+        <name>Visit_Cockpit_App</name>
+    </customApplications>
+    <customTabs>
+        <label>Cockpit des visites</label>
+        <name>Visit_Cockpit</name>
+    </customTabs>
+    <quickActions>
+        <label>Générer le grounding</label>
+        <name>Demo_Context__c.Generate_Grounding</name>
+    </quickActions>
+    <quickActions>
+        <label>Générer le CR</label>
+        <name>Visit_Capture__c.Generate_Report</name>
+    </quickActions>
+    <quickActions>
+        <label>Matérialiser le plan d'action</label>
+        <name>Visit_Capture__c.Materialize_Plan</name>
+    </quickActions>
+    <customLabels>
+        <label>Préparation</label>
+        <name>VC_Workspace_Tab_Prep</name>
+    </customLabels>
+    <customLabels>
+        <label>Exécution</label>
+        <name>VC_Workspace_Tab_Execution</name>
+    </customLabels>
+    <customLabels>
+        <label>Bilan</label>
+        <name>VC_Workspace_Tab_Outcome</name>
+    </customLabels>
+    <customLabels>
+        <label>Pose le décor avant le rendez-vous. Choisis le contexte de démo et confirme les liens CRM.</label>
+        <name>VC_Workspace_Prep_Intro</name>
+    </customLabels>
+    <customLabels>
+        <label>Capture ce qui s'est passé et laisse l'IA faire le reste.</label>
+        <name>VC_Workspace_Execution_Intro</name>
+    </customLabels>
+    <customLabels>
+        <label>Ta visite, transformée en actions CRM.</label>
+        <name>VC_Workspace_Outcome_Intro</name>
+    </customLabels>
+    <customLabels>
+        <label>Zone dédiée démo</label>
+        <name>VC_Workspace_DemoZone_Title</name>
+    </customLabels>
+    <customLabels>
+        <label>Le Contexte Démo ci-dessous est utilisé à des fins de démonstration et pré-remplit le grounding IA.</label>
+        <name>VC_Workspace_DemoZone_Hint</name>
+    </customLabels>
+    <customLabels>
+        <label>Contexte démo</label>
+        <name>VC_Workspace_DemoContext_Label</name>
+    </customLabels>
+    <customLabels>
+        <label>Rechercher un contexte démo…</label>
+        <name>VC_Workspace_DemoContext_Placeholder</name>
+    </customLabels>
+    <customLabels>
+        <label>Liens CRM</label>
+        <name>VC_Workspace_CRM_Title</name>
+    </customLabels>
+    <customLabels>
+        <label>Compte</label>
+        <name>VC_Workspace_Account</name>
+    </customLabels>
+    <customLabels>
+        <label>Contact</label>
+        <name>VC_Workspace_Contact</name>
+    </customLabels>
+    <customLabels>
+        <label>Opportunité</label>
+        <name>VC_Workspace_Opportunity</name>
+    </customLabels>
+    <customLabels>
+        <label>In-Person Meeting (VideoCall)</label>
+        <name>VC_Workspace_VideoCall_Label</name>
+    </customLabels>
+    <customLabels>
+        <label>Ouvrir le Contexte Démo</label>
+        <name>VC_Workspace_OpenDemoContext</name>
+    </customLabels>
+    <customLabels>
+        <label>Démarrer la visite →</label>
+        <name>VC_Workspace_NextToExecution</name>
+    </customLabels>
+    <customLabels>
+        <label>Voir le bilan →</label>
+        <name>VC_Workspace_NextToOutcome</name>
+    </customLabels>
+    <customLabels>
+        <label>Brief de visite</label>
+        <name>VC_Brief_Section_Title</name>
+    </customLabels>
+    <customLabels>
+        <label>Laisse Einstein préparer un brief tactique à partir du grounding et des données CRM.</label>
+        <name>VC_Brief_Section_Hint</name>
+    </customLabels>
+    <customLabels>
+        <label>Générer le brief de visite</label>
+        <name>VC_Brief_Button_Generate</name>
+    </customLabels>
+    <customLabels>
+        <label>Régénérer le brief</label>
+        <name>VC_Brief_Button_Regenerate</name>
+    </customLabels>
+    <customLabels>
+        <label>Rédaction de ton brief en cours…</label>
+        <name>VC_Brief_Generating</name>
+    </customLabels>
+    <customLabels>
+        <label>Brief prêt</label>
+        <name>VC_Brief_Toast_Success</name>
+    </customLabels>
+    <customLabels>
+        <label>Ton brief de visite vient d'être généré.</label>
+        <name>VC_Brief_Toast_SuccessMsg</name>
+    </customLabels>
+    <customLabels>
+        <label>Échec de la génération du brief</label>
+        <name>VC_Brief_Toast_Failed</name>
+    </customLabels>
+    <customLabels>
+        <label>Lie un Contexte Démo et un Compte ci-dessus, puis génère le brief.</label>
+        <name>VC_Brief_Empty_Hint</name>
+    </customLabels>
+    <customLabels>
+        <label>1 · Grounding</label>
+        <name>VC_Workspace_PrepStep1</name>
+    </customLabels>
+    <customLabels>
+        <label>2 · Liens CRM</label>
+        <name>VC_Workspace_PrepStep2</name>
+    </customLabels>
+    <customLabels>
+        <label>Mon bilan de visites</label>
+        <name>VC_Cockpit_Title</name>
+    </customLabels>
+    <customLabels>
+        <label>Tour d'horizon de ton activité commerciale et des CR à finaliser.</label>
+        <name>VC_Cockpit_Subtitle</name>
+    </customLabels>
+    <customLabels>
+        <label>Période</label>
+        <name>VC_Cockpit_Period</name>
+    </customLabels>
+    <customLabels>
+        <label>7 derniers jours</label>
+        <name>VC_Period_Week</name>
+    </customLabels>
+    <customLabels>
+        <label>4 dernières semaines</label>
+        <name>VC_Period_4Weeks</name>
+    </customLabels>
+    <customLabels>
+        <label>30 derniers jours</label>
+        <name>VC_Period_Month</name>
+    </customLabels>
+    <customLabels>
+        <label>90 derniers jours</label>
+        <name>VC_Period_Quarter</name>
+    </customLabels>
+    <customLabels>
+        <label>Visites à finaliser</label>
+        <name>VC_Queue_MissingReports_Title</name>
+    </customLabels>
+    <customLabels>
+        <label>Toutes les visites ont un CR. Beau travail.</label>
+        <name>VC_Queue_MissingReports_Empty</name>
+    </customLabels>
+    <customLabels>
+        <label>Plans d'action en attente</label>
+        <name>VC_Queue_MissingPlans_Title</name>
+    </customLabels>
+    <customLabels>
+        <label>Aucun plan d'action en attente.</label>
+        <name>VC_Queue_MissingPlans_Empty</name>
+    </customLabels>
+    <customLabels>
+        <label>Chargement</label>
+        <name>VC_Queue_Loading</name>
+    </customLabels>
+    <customLabels>
+        <label>(aucun compte)</label>
+        <name>VC_Queue_NoAccount</name>
+    </customLabels>
+    <customLabels>
+        <label>ECI</label>
+        <name>VC_Badge_ECI</name>
+    </customLabels>
+    <customLabels>
+        <label>Manuel</label>
+        <name>VC_Badge_Manual</name>
+    </customLabels>
+    <customLabels>
+        <label>Dictée</label>
+        <name>VC_Badge_Dictation</name>
+    </customLabels>
+    <customLabels>
+        <label>Générer le CR</label>
+        <name>VC_Button_GenerateReport</name>
+    </customLabels>
+    <customLabels>
+        <label>Régénérer le CR</label>
+        <name>VC_Button_RegenerateReport</name>
+    </customLabels>
+    <customLabels>
+        <label>Créer le plan d'action</label>
+        <name>VC_Button_CreatePlan</name>
+    </customLabels>
+    <customLabels>
+        <label>Recréer le plan</label>
+        <name>VC_Button_RecreatePlan</name>
+    </customLabels>
+    <customLabels>
+        <label>il y a moins d'1h</label>
+        <name>VC_Staleness_LessThanHour</name>
+    </customLabels>
+    <customLabels>
+        <label>il y a {0}h</label>
+        <name>VC_Staleness_HoursAgo</name>
+    </customLabels>
+    <customLabels>
+        <label>il y a {0}j</label>
+        <name>VC_Staleness_DaysAgo</name>
+    </customLabels>
+    <customLabels>
+        <label>Visites totales</label>
+        <name>VC_Kpi_TotalVisits</name>
+    </customLabels>
+    <customLabels>
+        <label>Sur la période sélectionnée</label>
+        <name>VC_Kpi_TotalVisits_Desc</name>
+    </customLabels>
+    <customLabels>
+        <label>À finaliser</label>
+        <name>VC_Kpi_MissingReports</name>
+    </customLabels>
+    <customLabels>
+        <label>Visites sans CR</label>
+        <name>VC_Kpi_MissingReports_Some</name>
+    </customLabels>
+    <customLabels>
+        <label>Tout est à jour</label>
+        <name>VC_Kpi_MissingReports_None</name>
+    </customLabels>
+    <customLabels>
+        <label>Plans en attente</label>
+        <name>VC_Kpi_MissingPlans</name>
+    </customLabels>
+    <customLabels>
+        <label>CR prêts sans plan matérialisé</label>
+        <name>VC_Kpi_MissingPlans_Some</name>
+    </customLabels>
+    <customLabels>
+        <label>Aucun en attente</label>
+        <name>VC_Kpi_MissingPlans_None</name>
+    </customLabels>
+    <customLabels>
+        <label>Tasks + Events créés</label>
+        <name>VC_Kpi_TasksEvents</name>
+    </customLabels>
+    <customLabels>
+        <label>{0} tâches, {1} events</label>
+        <name>VC_Kpi_TasksEvents_Desc</name>
+    </customLabels>
+    <customLabels>
+        <label>Transcrites via ECI</label>
+        <name>VC_Kpi_Eci</name>
+    </customLabels>
+    <customLabels>
+        <label>In Person Meeting</label>
+        <name>VC_Kpi_Eci_Desc</name>
+    </customLabels>
+    <customLabels>
+        <label>Dictée / manuel</label>
+        <name>VC_Kpi_Manual</name>
+    </customLabels>
+    <customLabels>
+        <label>Sans ECI</label>
+        <name>VC_Kpi_Manual_Desc</name>
+    </customLabels>
+    <customLabels>
+        <label>Nouveau</label>
+        <name>VC_Kpi_DeltaNew</name>
+    </customLabels>
+    <customLabels>
+        <label>{0}% vs période précédente</label>
+        <name>VC_Kpi_DeltaVsPrevious</name>
+    </customLabels>
+    <customLabels>
+        <label>Hausse</label>
+        <name>VC_Kpi_DeltaUp</name>
+    </customLabels>
+    <customLabels>
+        <label>Baisse</label>
+        <name>VC_Kpi_DeltaDown</name>
+    </customLabels>
+    <customLabels>
+        <label>Erreur de chargement</label>
+        <name>VC_Common_LoadError</name>
+    </customLabels>
+    <customLabels>
+        <label>Erreur</label>
+        <name>VC_Common_Error</name>
+    </customLabels>
+    <customLabels>
+        <label>Volume hebdomadaire</label>
+        <name>VC_Analytics_Weekly_Title</name>
+    </customLabels>
+    <customLabels>
+        <label>Total :</label>
+        <name>VC_Analytics_Weekly_Total</name>
+    </customLabels>
+    <customLabels>
+        <label>visites</label>
+        <name>VC_Analytics_VisitsWord</name>
+    </customLabels>
+    <customLabels>
+        <label>Pas assez de données sur cette période.</label>
+        <name>VC_Analytics_Weekly_NoData</name>
+    </customLabels>
+    <customLabels>
+        <label>Source de capture</label>
+        <name>VC_Analytics_Source_Title</name>
+    </customLabels>
+    <customLabels>
+        <label>Pas de données.</label>
+        <name>VC_Analytics_Source_NoData</name>
+    </customLabels>
+    <customLabels>
+        <label>Top comptes visités</label>
+        <name>VC_Analytics_TopAccounts_Title</name>
+    </customLabels>
+    <customLabels>
+        <label>Pas de comptes visités.</label>
+        <name>VC_Analytics_TopAccounts_NoData</name>
+    </customLabels>
+    <customLabels>
+        <label>Dernière :</label>
+        <name>VC_Analytics_LastVisit</name>
+    </customLabels>
+    <customLabels>
+        <label>Visites capturées</label>
+        <name>VC_EventRelated_Title</name>
+    </customLabels>
+    <customLabels>
+        <label>Aucune visite liée à cet événement.</label>
+        <name>VC_EventRelated_Empty</name>
+    </customLabels>
+    <customLabels>
+        <label>Visites récentes</label>
+        <name>VC_Recent_Title</name>
+    </customLabels>
+    <customLabels>
+        <label>10 dernières</label>
+        <name>VC_Recent_Subtitle</name>
+    </customLabels>
+    <customLabels>
+        <label>Date</label>
+        <name>VC_Recent_Col_Date</name>
+    </customLabels>
+    <customLabels>
+        <label>Compte</label>
+        <name>VC_Recent_Col_Account</name>
+    </customLabels>
+    <customLabels>
+        <label>Contact</label>
+        <name>VC_Recent_Col_Contact</name>
+    </customLabels>
+    <customLabels>
+        <label>Source</label>
+        <name>VC_Recent_Col_Source</name>
+    </customLabels>
+    <customLabels>
+        <label>CR</label>
+        <name>VC_Recent_Col_Report</name>
+    </customLabels>
+    <customLabels>
+        <label>Plan</label>
+        <name>VC_Recent_Col_Plan</name>
+    </customLabels>
+    <customLabels>
+        <label>Langue</label>
+        <name>VC_Recent_Col_Language</name>
+    </customLabels>
+    <customLabels>
+        <label>Ouvrir</label>
+        <name>VC_Recent_Open</name>
+    </customLabels>
+    <customLabels>
+        <label>Aucune visite sur la période.</label>
+        <name>VC_Recent_Empty</name>
+    </customLabels>
+    <customLabels>
+        <label>CR généré</label>
+        <name>VC_Recent_ReportDone</name>
+    </customLabels>
+    <customLabels>
+        <label>À finaliser</label>
+        <name>VC_Recent_ReportPending</name>
+    </customLabels>
+    <customLabels>
+        <label>Matérialisé</label>
+        <name>VC_Recent_PlanMaterialized</name>
+    </customLabels>
+    <customLabels>
+        <label>En attente</label>
+        <name>VC_Recent_PlanPending</name>
+    </customLabels>
+    <customLabels>
+        <label>Aucun</label>
+        <name>VC_Recent_PlanNone</name>
+    </customLabels>
+    <customLabels>
+        <label>Ouvrir la fiche complète</label>
+        <name>VC_Detail_OpenFullRecord</name>
+    </customLabels>
+    <customLabels>
+        <label>Fermer</label>
+        <name>VC_Detail_Close</name>
+    </customLabels>
+    <customLabels>
+        <label>Éléments de la visite</label>
+        <name>VC_Detail_Section_Inputs</name>
+    </customLabels>
+    <customLabels>
+        <label>Grounding :</label>
+        <name>VC_Detail_Grounding</name>
+    </customLabels>
+    <customLabels>
+        <label>Pas de Demo Context lié à cette visite.</label>
+        <name>VC_Detail_NoDemoContext</name>
+    </customLabels>
+    <customLabels>
+        <label>VideoCall lié — transcription ECI injectée automatiquement</label>
+        <name>VC_Detail_VideoCallLinked</name>
+    </customLabels>
+    <customLabels>
+        <label>Transcription ECI (lecture seule)</label>
+        <name>VC_Detail_EciTranscript_Label</name>
+    </customLabels>
+    <customLabels>
+        <label>Transcription brute de l'In Person Meeting. Fais défiler pour la relire.</label>
+        <name>VC_Detail_EciTranscript_Help</name>
+    </customLabels>
+    <customLabels>
+        <label>Transcription vocale</label>
+        <name>VC_Detail_Transcript_Label</name>
+    </customLabels>
+    <customLabels>
+        <label>Colle ici le transcript ou dicte depuis ton mobile. Autosave activé.</label>
+        <name>VC_Detail_Transcript_Placeholder</name>
+    </customLabels>
+    <customLabels>
+        <label>Modifiable. Si un VideoCall est lié, la transcription ECI est utilisée en priorité par le prompt.</label>
+        <name>VC_Detail_Transcript_Help</name>
+    </customLabels>
+    <customLabels>
+        <label>Notes libres</label>
+        <name>VC_Detail_Summary_Label</name>
+    </customLabels>
+    <customLabels>
+        <label>Ce que tu veux noter en plus (points saillants, signaux faibles, ambiance...).</label>
+        <name>VC_Detail_Summary_Placeholder</name>
+    </customLabels>
+    <customLabels>
+        <label>Pièces jointes</label>
+        <name>VC_Detail_Attachments_Label</name>
+    </customLabels>
+    <customLabels>
+        <label>jpg, png, pdf — max 5 Mo</label>
+        <name>VC_Detail_Attachments_Help</name>
+    </customLabels>
+    <customLabels>
+        <label>Actions IA</label>
+        <name>VC_Detail_Section_AIActions</name>
+    </customLabels>
+    <customLabels>
+        <label>Génération du CR en cours…</label>
+        <name>VC_Detail_GeneratingReport</name>
+    </customLabels>
+    <customLabels>
+        <label>Création des Tasks et Events…</label>
+        <name>VC_Detail_MaterializingPlan</name>
+    </customLabels>
+    <customLabels>
+        <label>Compte-rendu</label>
+        <name>VC_Detail_Section_Report</name>
+    </customLabels>
+    <customLabels>
+        <label>Plan d'action</label>
+        <name>VC_Detail_Section_Plan</name>
+    </customLabels>
+    <customLabels>
+        <label>Événement</label>
+        <name>VC_Detail_Type_Event</name>
+    </customLabels>
+    <customLabels>
+        <label>Tâche</label>
+        <name>VC_Detail_Type_Task</name>
+    </customLabels>
+    <customLabels>
+        <label>{0} min</label>
+        <name>VC_Detail_Duration_Minutes</name>
+    </customLabels>
+    <customLabels>
+        <label>CR ✓</label>
+        <name>VC_Detail_Badge_Report_Done</name>
+    </customLabels>
+    <customLabels>
+        <label>CR à faire</label>
+        <name>VC_Detail_Badge_Report_Todo</name>
+    </customLabels>
+    <customLabels>
+        <label>Plan ✓</label>
+        <name>VC_Detail_Badge_Plan_Done</name>
+    </customLabels>
+    <customLabels>
+        <label>Plan en attente</label>
+        <name>VC_Detail_Badge_Plan_Pending</name>
+    </customLabels>
+    <customLabels>
+        <label>Aucun plan</label>
+        <name>VC_Detail_Badge_Plan_None</name>
+    </customLabels>
+    <customLabels>
+        <label>Régénérer le CR ?</label>
+        <name>VC_Modal_RegenTitle</name>
+    </customLabels>
+    <customLabels>
+        <label>Un compte-rendu existe déjà. La régénération va écraser le contenu actuel.</label>
+        <name>VC_Modal_RegenBody</name>
+    </customLabels>
+    <customLabels>
+        <label>Si le plan d'action a déjà été matérialisé, les Tasks et Events existants ne seront pas supprimés.</label>
+        <name>VC_Modal_RegenNote</name>
+    </customLabels>
+    <customLabels>
+        <label>Annuler</label>
+        <name>VC_Modal_Cancel</name>
+    </customLabels>
+    <customLabels>
+        <label>Confirmer la régénération</label>
+        <name>VC_Modal_ConfirmRegen</name>
+    </customLabels>
+    <customLabels>
+        <label>CR généré</label>
+        <name>VC_Toast_ReportGenerated</name>
+    </customLabels>
+    <customLabels>
+        <label>Langue détectée : {0}</label>
+        <name>VC_Toast_ReportLanguage</name>
+    </customLabels>
+    <customLabels>
+        <label>Échec génération</label>
+        <name>VC_Toast_ReportFailed</name>
+    </customLabels>
+    <customLabels>
+        <label>Plan matérialisé</label>
+        <name>VC_Toast_PlanMaterialized</name>
+    </customLabels>
+    <customLabels>
+        <label>{0} tâches + {1} événements créés</label>
+        <name>VC_Toast_PlanResult</name>
+    </customLabels>
+    <customLabels>
+        <label>Échec matérialisation</label>
+        <name>VC_Toast_PlanFailed</name>
+    </customLabels>
+    <customLabels>
+        <label>Sauvegarde échouée</label>
+        <name>VC_Toast_SaveFailed</name>
+    </customLabels>
+    <customLabels>
+        <label>Erreur réseau</label>
+        <name>VC_Toast_NetworkError</name>
+    </customLabels>
+    <customLabels>
+        <label>Erreur inconnue</label>
+        <name>VC_Toast_UnknownError</name>
+    </customLabels>
+    <customLabels>
+        <label>Fichiers rejetés</label>
+        <name>VC_Toast_FilesRejected</name>
+    </customLabels>
+    <customLabels>
+        <label>Seuls jpg/png/pdf de moins de 5 Mo sont acceptés.</label>
+        <name>VC_Toast_FilesRejectedMsg</name>
+    </customLabels>
+    <customLabels>
+        <label>Fichiers uploadés</label>
+        <name>VC_Toast_FilesUploaded</name>
+    </customLabels>
+    <customLabels>
+        <label>{0} fichier(s) ajouté(s).</label>
+        <name>VC_Toast_FilesUploadedMsg</name>
+    </customLabels>
+</Translations>

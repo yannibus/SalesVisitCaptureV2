@@ -1,0 +1,274 @@
+<template>
+    <div class="vc-workspace">
+        <nav class="vc-tabs">
+            <button class={tabPrepClass} onclick={handleTabPrep}>
+                <span class="vc-tab-num">1</span>
+                <span class="vc-tab-label">{labels.tabPrep}</span>
+            </button>
+            <button class={tabExecClass} onclick={handleTabExec}>
+                <span class="vc-tab-num">2</span>
+                <span class="vc-tab-label">{labels.tabExecution}</span>
+            </button>
+            <button class={tabOutcomeClass} onclick={handleTabOutcome}>
+                <span class="vc-tab-num">3</span>
+                <span class="vc-tab-label">{labels.tabOutcome}</span>
+            </button>
+            <div class="vc-tabs-progress-track">
+                <div class="vc-tabs-progress-fill" style={tabProgressStyle}></div>
+            </div>
+        </nav>
+
+        <template if:true={error}>
+            <div class="slds-notify slds-notify_alert slds-alert_error slds-m-around_medium">{error}</div>
+        </template>
+
+        <template if:true={loading}>
+            <div class="slds-p-around_large slds-text-align_center">
+                <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+            </div>
+        </template>
+
+        <template if:true={hasVisit}>
+            <!-- TAB 1 — PREPARATION -->
+            <template if:true={isPrep}>
+                <section class="vc-panel vc-fade-in">
+                    <header class="vc-panel-header">
+                        <h2 class="vc-panel-title">{labels.tabPrep}</h2>
+                        <p class="vc-panel-intro">{labels.prepIntro}</p>
+                    </header>
+
+                    <article class="vc-demo-zone">
+                        <div class="vc-demo-zone-header">
+                            <lightning-icon icon-name="utility:magicwand" size="x-small"></lightning-icon>
+                            <span class="vc-demo-zone-title">{labels.demoZoneTitle}</span>
+                        </div>
+                        <p class="vc-demo-zone-hint">{labels.demoZoneHint}</p>
+                        <div class="vc-demo-zone-body">
+                            <lightning-record-edit-form record-id={recordId} object-api-name="Visit_Capture__c" onsuccess={handleRecordFieldChange}>
+                                <lightning-input-field field-name="Demo_Context__c" variant="label-hidden"></lightning-input-field>
+                            </lightning-record-edit-form>
+                            <template if:true={hasDemoContext}>
+                                <div class="vc-demo-summary">
+                                    <span class="vc-demo-summary-label">{demoContextSummary}</span>
+                                    <button class="vc-link-btn" onclick={handleOpenDemoContext}>{labels.openDemoContext} →</button>
+                                </div>
+                            </template>
+                        </div>
+                    </article>
+
+                    <article class="vc-card">
+                        <header class="vc-card-header">
+                            <h3 class="vc-card-title">{labels.crmTitle}</h3>
+                            <span class="vc-step-pill">{labels.prepStep2}</span>
+                        </header>
+                        <lightning-record-edit-form record-id={recordId} object-api-name="Visit_Capture__c" onsuccess={handleRecordFieldChange}>
+                            <div class="slds-grid slds-gutters slds-wrap">
+                                <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-3">
+                                    <lightning-input-field field-name="Account__c"></lightning-input-field>
+                                </div>
+                                <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-3">
+                                    <lightning-input-field field-name="Contact__c"></lightning-input-field>
+                                </div>
+                                <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-3">
+                                    <lightning-input-field field-name="Opportunity__c"></lightning-input-field>
+                                </div>
+                            </div>
+                        </lightning-record-edit-form>
+                    </article>
+
+                    <article class="vc-brief-card">
+                        <header class="vc-card-header">
+                            <div>
+                                <h3 class="vc-card-title">{labels.briefTitle}</h3>
+                                <p class="slds-text-body_small vc-muted">{labels.briefHint}</p>
+                            </div>
+                            <button class="vc-ai-btn vc-ai-btn_primary" onclick={handleGenerateBrief} disabled={briefButtonDisabled}>
+                                <lightning-icon icon-name="utility:einstein" size="x-small" variant="inverse"></lightning-icon>
+                                <span>{briefButtonLabel}</span>
+                            </button>
+                        </header>
+
+                        <template if:true={generatingBrief}>
+                            <div class="vc-brief-loading">
+                                <lightning-spinner alternative-text={labels.briefGenerating} size="small"></lightning-spinner>
+                                <span class="slds-m-left_small">{labels.briefGenerating}</span>
+                            </div>
+                        </template>
+
+                        <template if:true={hasBrief}>
+                            <div class="vc-brief-content vc-fade-in">
+                                <lightning-formatted-rich-text value={briefHtml}></lightning-formatted-rich-text>
+                            </div>
+                        </template>
+
+                        <template if:false={hasBrief}>
+                            <template if:false={generatingBrief}>
+                                <p class="vc-brief-empty slds-text-body_small vc-muted">{labels.briefEmptyHint}</p>
+                            </template>
+                        </template>
+                    </article>
+
+                    <footer class="vc-panel-footer">
+                        <button class="vc-primary-btn" onclick={handleGoToExec}>{labels.nextToExecution}</button>
+                    </footer>
+                </section>
+            </template>
+
+            <!-- TAB 2 — EXECUTION -->
+            <template if:true={isExec}>
+                <section class="vc-panel vc-fade-in">
+                    <header class="vc-panel-header">
+                        <h2 class="vc-panel-title">{labels.tabExecution}</h2>
+                        <p class="vc-panel-intro">{labels.executionIntro}</p>
+                    </header>
+
+                    <article class="vc-card">
+                        <header class="vc-card-header">
+                            <h3 class="vc-card-title">{labels.videoCallLabel}</h3>
+                        </header>
+                        <lightning-record-edit-form record-id={recordId} object-api-name="Visit_Capture__c" onsuccess={handleRecordFieldChange}>
+                            <lightning-input-field field-name="VideoCall__c" variant="label-hidden"></lightning-input-field>
+                        </lightning-record-edit-form>
+                        <template if:true={hasEciTranscript}>
+                            <div class="vc-eci-block slds-m-top_small">
+                                <label class="slds-form-element__label">{labels.eciTranscriptLabel}</label>
+                                <textarea class="vc-eci-transcript-readonly" readonly rows="4">{eciTranscript}</textarea>
+                                <p class="slds-text-body_small vc-muted slds-m-top_xx-small">{labels.eciTranscriptHelp}</p>
+                            </div>
+                        </template>
+                    </article>
+
+                    <article class="vc-card">
+                        <header class="vc-card-header">
+                            <h3 class="vc-card-title">{labels.transcriptLabel}</h3>
+                        </header>
+                        <lightning-textarea
+                            variant="label-hidden"
+                            label={labels.transcriptLabel}
+                            value={localTranscript}
+                            onchange={handleTranscriptChange}
+                            placeholder={labels.transcriptPlaceholder}>
+                        </lightning-textarea>
+                        <lightning-textarea
+                            class="slds-m-top_small"
+                            label={labels.summaryLabel}
+                            value={localSummary}
+                            onchange={handleSummaryChange}
+                            placeholder={labels.summaryPlaceholder}>
+                        </lightning-textarea>
+                    </article>
+
+                    <article class="vc-card">
+                        <header class="vc-card-header">
+                            <h3 class="vc-card-title">{labels.attachmentsLabel}</h3>
+                        </header>
+                        <lightning-file-upload
+                            label=""
+                            name="attachments"
+                            accept={acceptedFormats}
+                            record-id={recordId}
+                            onuploadfinished={handleFileUploaded}
+                            multiple>
+                        </lightning-file-upload>
+                        <p class="slds-text-body_small vc-muted slds-m-top_xx-small">{labels.attachmentsHelp}</p>
+                    </article>
+
+                    <article class="vc-ai-card">
+                        <header class="vc-card-header">
+                            <h3 class="vc-card-title">{labels.sectionAI}</h3>
+                        </header>
+                        <div class="vc-ai-buttons">
+                            <button class="vc-ai-btn vc-ai-btn_primary" onclick={handleGenerateReport} disabled={generatingReport}>
+                                <lightning-icon icon-name="utility:einstein" size="x-small" variant="inverse"></lightning-icon>
+                                <span>{reportButtonLabel}</span>
+                            </button>
+                            <template if:true={generatingReport}>
+                                <div class="vc-ai-progress">
+                                    <lightning-spinner alternative-text={labels.generatingReport} size="x-small"></lightning-spinner>
+                                    <span>{labels.generatingReport}</span>
+                                </div>
+                            </template>
+
+                            <button class="vc-ai-btn vc-ai-btn_secondary" onclick={handleMaterializePlan} disabled={planButtonDisabled}>
+                                <lightning-icon icon-name="utility:task" size="x-small"></lightning-icon>
+                                <span>{planButtonLabel}</span>
+                            </button>
+                            <template if:true={materializingPlan}>
+                                <div class="vc-ai-progress">
+                                    <lightning-spinner alternative-text={labels.materializingPlan} size="x-small"></lightning-spinner>
+                                    <span>{labels.materializingPlan}</span>
+                                </div>
+                            </template>
+                        </div>
+                    </article>
+
+                    <footer class="vc-panel-footer">
+                        <button class="vc-primary-btn" onclick={handleGoToOutcome}>{labels.nextToOutcome}</button>
+                    </footer>
+                </section>
+            </template>
+
+            <!-- TAB 3 — OUTCOME -->
+            <template if:true={isOutcome}>
+                <section class="vc-panel vc-fade-in">
+                    <header class="vc-panel-header">
+                        <h2 class="vc-panel-title">{labels.tabOutcome}</h2>
+                        <p class="vc-panel-intro">{labels.outcomeIntro}</p>
+                    </header>
+
+                    <template if:true={hasReport}>
+                        <article class="vc-card vc-outcome-report">
+                            <header class="vc-card-header">
+                                <h3 class="vc-card-title">{labels.sectionReport}</h3>
+                            </header>
+                            <div class="vc-report-body">
+                                <lightning-formatted-rich-text value={reportPreviewHtml}></lightning-formatted-rich-text>
+                            </div>
+                        </article>
+                    </template>
+
+                    <template if:true={hasPlan}>
+                        <article class="vc-card">
+                            <header class="vc-card-header">
+                                <h3 class="vc-card-title">{labels.sectionPlan}</h3>
+                            </header>
+                            <ul class="vc-plan-list">
+                                <template for:each={actionPlanItems} for:item="it">
+                                    <li key={it.key} class="vc-plan-card">
+                                        <div class="vc-plan-card-header">
+                                            <span class={it.typeBadgeClass}>{it.typeLabel}</span>
+                                            <template if:true={it.dateLabel}>
+                                                <span class="vc-plan-date">{it.dateLabel}</span>
+                                            </template>
+                                            <template if:true={it.durationLabel}>
+                                                <span class="vc-plan-duration">{it.durationLabel}</span>
+                                            </template>
+                                        </div>
+                                        <p class="vc-plan-title">{it.title}</p>
+                                        <p class="vc-plan-description">{it.description}</p>
+                                    </li>
+                                </template>
+                            </ul>
+                        </article>
+                    </template>
+
+                    <template if:true={hasFiles}>
+                        <article class="vc-card">
+                            <header class="vc-card-header">
+                                <h3 class="vc-card-title">{labels.attachmentsLabel}</h3>
+                            </header>
+                            <ul class="vc-files-list">
+                                <template for:each={files} for:item="f">
+                                    <li key={f.Id} class="vc-file-item">
+                                        <lightning-icon icon-name="doctype:attachment" size="x-small"></lightning-icon>
+                                        <span class="slds-m-left_x-small slds-truncate">{f.ContentDocument.Title}</span>
+                                    </li>
+                                </template>
+                            </ul>
+                        </article>
+                    </template>
+                </section>
+            </template>
+        </template>
+    </div>
+</template>

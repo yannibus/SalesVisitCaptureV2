@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <name>Run_Grounding</name>
+        <label>Run grounding generation</label>
+        <locationX>176</locationX>
+        <locationY>134</locationY>
+        <actionName>DemoGroundingParser</actionName>
+        <actionType>apex</actionType>
+        <connector>
+            <targetReference>Show_Result</targetReference>
+        </connector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>demoContextId</name>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>DemoGroundingParser</nameSegment>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </actionCalls>
+    <apiVersion>64.0</apiVersion>
+    <description>Quick Action entry point: triggers the DemoGroundingParser Apex action which invokes the Prep_Demo_Grounding prompt and writes the 5 AI fields on Demo_Context__c.</description>
+    <environments>Default</environments>
+    <interviewLabel>Generate Demo Grounding {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Generate Demo Grounding</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>Flow</processType>
+    <screens>
+        <name>Show_Result</name>
+        <label>Grounding généré</label>
+        <locationX>176</locationX>
+        <locationY>254</locationY>
+        <allowBack>false</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+        <fields>
+            <name>ResultMessage</name>
+            <fieldText>&lt;p&gt;Le grounding a été généré. Fermez cette fenêtre pour voir les 5 champs IA remplis sur votre page.&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Run_Grounding</targetReference>
+        </connector>
+    </start>
+    <status>Active</status>
+    <variables>
+        <name>recordId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+</Flow>

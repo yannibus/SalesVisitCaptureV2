@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Contexte démo</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Contextes démo</value>
+    </caseValues>
+    <fields>
+        <label>Nom de l'entreprise</label>
+        <name>Account_Name__c</name>
+    </fields>
+    <fields>
+        <label>Profil entreprise (IA)</label>
+        <name>Company_Profile__c</name>
+    </fields>
+    <fields>
+        <label>Notes de contexte</label>
+        <name>Context_Notes__c</name>
+    </fields>
+    <fields>
+        <label>Accroches conversation (IA)</label>
+        <name>Conversation_Hooks__c</name>
+    </fields>
+    <fields>
+        <label>Objectif de la démo</label>
+        <name>Demo_Goal__c</name>
+    </fields>
+    <fields>
+        <label>Industrie</label>
+        <name>Industry__c</name>
+    </fields>
+    <fields>
+        <label>Type de rendez-vous</label>
+        <name>Meeting_Type__c</name>
+    </fields>
+    <fields>
+        <label>Carte des objections (IA)</label>
+        <name>Objection_Map__c</name>
+    </fields>
+    <fields>
+        <label>Points de douleur (IA)</label>
+        <name>Pain_Points__c</name>
+    </fields>
+    <fields>
+        <label>Personas</label>
+        <name>Personas__c</name>
+    </fields>
+    <fields>
+        <label>Critères de succès (IA)</label>
+        <name>Success_Criteria__c</name>
+    </fields>
+    <gender>Masculine</gender>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

@@ -1,0 +1,226 @@
+<template>
+    <div class="vc-drawer-root">
+        <template if:true={loading}>
+            <div class="slds-p-around_large slds-text-align_center">
+                <lightning-spinner alternative-text={labels.loading} size="medium"></lightning-spinner>
+            </div>
+        </template>
+
+        <template if:true={error}>
+            <div class="slds-p-around_medium">
+                <div class="slds-notify slds-notify_alert slds-alert_error">{error}</div>
+            </div>
+        </template>
+
+        <template if:true={visit}>
+            <header class="vc-drawer-header">
+                <div class="vc-drawer-header-top">
+                    <div class="vc-drawer-title-block">
+                        <h2 class="vc-drawer-title">{accountName}</h2>
+                        <p class="vc-drawer-subtitle">{contactName}</p>
+                    </div>
+                    <div class="vc-drawer-actions">
+                        <lightning-button-icon
+                            icon-name="utility:open_in_new"
+                            alternative-text={labels.openFullRecord}
+                            title={labels.openFullRecord}
+                            variant="border-filled"
+                            onclick={handleOpenFullRecord}>
+                        </lightning-button-icon>
+                        <lightning-button-icon
+                            icon-name="utility:close"
+                            alternative-text={labels.close}
+                            title={labels.close}
+                            variant="border-filled"
+                            onclick={handleClose}
+                            class="slds-m-left_xx-small">
+                        </lightning-button-icon>
+                    </div>
+                </div>
+                <div class="vc-drawer-badges slds-m-top_small">
+                    <span class={sourceBadgeClass}>{sourceBadgeLabel}</span>
+                    <span class={reportBadgeClass}>{reportBadgeLabel}</span>
+                    <span class={planBadgeClass}>{planBadgeLabel}</span>
+                </div>
+            </header>
+
+            <div class="vc-drawer-body">
+                <section class="vc-section">
+                    <h3 class="vc-section-title">{labels.sectionInputs}</h3>
+                    <div class="slds-grid slds-gutters_small slds-wrap">
+                        <div class="slds-col slds-size_1-of-1">
+                            <template if:true={hasDemoContext}>
+                                <div class="vc-linked-context" onclick={handleOpenDemoContext}>
+                                    <lightning-icon icon-name="utility:insights" size="x-small"></lightning-icon>
+                                    <span class="slds-m-left_x-small">{labels.grounding} <strong>{demoContextLabel}</strong></span>
+                                </div>
+                            </template>
+                            <template if:false={hasDemoContext}>
+                                <div class="vc-missing-context">
+                                    <lightning-icon icon-name="utility:warning" size="x-small"></lightning-icon>
+                                    <span class="slds-m-left_x-small">{labels.noDemoContext}</span>
+                                </div>
+                            </template>
+                        </div>
+
+                        <template if:true={hasVideoCall}>
+                            <div class="slds-col slds-size_1-of-1 slds-m-top_x-small">
+                                <div class="vc-linked-context" onclick={handleOpenVideoCall}>
+                                    <lightning-icon icon-name="standard:live_chat" size="x-small"></lightning-icon>
+                                    <span class="slds-m-left_x-small">{labels.videoCallLinked}</span>
+                                </div>
+                            </div>
+                        </template>
+
+                        <template if:true={hasEciTranscript}>
+                            <div class="slds-col slds-size_1-of-1 slds-m-top_small">
+                                <label class="slds-form-element__label" for="vc-eci-transcript">{labels.eciTranscriptLabel}</label>
+                                <textarea
+                                    id="vc-eci-transcript"
+                                    class="vc-eci-transcript-readonly"
+                                    readonly
+                                    rows="4">{eciTranscript}</textarea>
+                                <p class="slds-text-body_small vc-muted slds-m-top_xx-small">{labels.eciTranscriptHelp}</p>
+                            </div>
+                        </template>
+
+                        <div class="slds-col slds-size_1-of-1 slds-m-top_small">
+                            <lightning-textarea
+                                name="transcript"
+                                label={labels.transcriptLabel}
+                                value={localTranscript}
+                                onchange={handleTranscriptChange}
+                                placeholder={labels.transcriptPlaceholder}
+                                field-level-help={labels.transcriptHelp}>
+                            </lightning-textarea>
+                        </div>
+                        <div class="slds-col slds-size_1-of-1 slds-m-top_small">
+                            <lightning-textarea
+                                name="summary"
+                                label={labels.summaryLabel}
+                                value={localSummary}
+                                onchange={handleSummaryChange}
+                                placeholder={labels.summaryPlaceholder}>
+                            </lightning-textarea>
+                        </div>
+
+                        <div class="slds-col slds-size_1-of-1 slds-m-top_small">
+                            <label class="slds-form-element__label">{labels.attachmentsLabel}</label>
+                            <lightning-file-upload
+                                label=""
+                                name="attachments"
+                                accept={acceptedFormats}
+                                record-id={recordId}
+                                onuploadfinished={handleFileUploaded}
+                                multiple>
+                            </lightning-file-upload>
+                            <p class="slds-text-body_small vc-muted slds-m-top_xx-small">{labels.attachmentsHelp}</p>
+                            <template if:true={hasFiles}>
+                                <ul class="vc-files-list slds-m-top_x-small">
+                                    <template for:each={files} for:item="f">
+                                        <li key={f.Id} class="vc-file-item">
+                                            <lightning-icon icon-name="doctype:attachment" size="x-small"></lightning-icon>
+                                            <span class="slds-m-left_x-small slds-truncate">{f.ContentDocument.Title}</span>
+                                        </li>
+                                    </template>
+                                </ul>
+                            </template>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="vc-section vc-actions-section">
+                    <h3 class="vc-section-title">{labels.sectionAI}</h3>
+                    <div class="slds-grid slds-gutters_small">
+                        <div class="slds-col slds-size_1-of-2">
+                            <lightning-button
+                                label={reportButtonLabel}
+                                variant="brand"
+                                icon-name="utility:einstein"
+                                onclick={handleGenerateReport}
+                                disabled={generatingReport}
+                                class="vc-action-button">
+                            </lightning-button>
+                            <template if:true={generatingReport}>
+                                <div class="vc-progress slds-m-top_x-small">
+                                    <lightning-spinner alternative-text={labels.generatingReport} size="x-small"></lightning-spinner>
+                                    <span class="slds-m-left_x-small">{labels.generatingReport}</span>
+                                </div>
+                            </template>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2">
+                            <lightning-button
+                                label={planButtonLabel}
+                                variant="neutral"
+                                icon-name="utility:task"
+                                onclick={handleMaterializePlan}
+                                disabled={planButtonDisabled}
+                                class="vc-action-button">
+                            </lightning-button>
+                            <template if:true={materializingPlan}>
+                                <div class="vc-progress slds-m-top_x-small">
+                                    <lightning-spinner alternative-text={labels.materializingPlan} size="x-small"></lightning-spinner>
+                                    <span class="slds-m-left_x-small">{labels.materializingPlan}</span>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                </section>
+
+                <template if:true={hasReport}>
+                    <section class="vc-section">
+                        <h3 class="vc-section-title">{labels.sectionReport}</h3>
+                        <div class="vc-report-preview">
+                            <lightning-formatted-rich-text value={reportPreviewHtml}></lightning-formatted-rich-text>
+                        </div>
+                    </section>
+                </template>
+
+                <template if:true={hasPlan}>
+                    <section class="vc-section">
+                        <h3 class="vc-section-title">{labels.sectionPlan}</h3>
+                        <ul class="vc-action-plan-list">
+                            <template for:each={actionPlanItems} for:item="it">
+                                <li key={it.key} class="vc-plan-card">
+                                    <div class="vc-plan-card-header">
+                                        <span class={it.typeBadgeClass}>{it.typeLabel}</span>
+                                        <template if:true={it.priority}>
+                                            <span class={it.priorityBadgeClass}>{it.priorityLabel}</span>
+                                        </template>
+                                        <template if:true={it.dateLabel}>
+                                            <span class="vc-plan-date">{it.dateLabel}</span>
+                                        </template>
+                                        <template if:true={it.durationLabel}>
+                                            <span class="vc-plan-duration">{it.durationLabel}</span>
+                                        </template>
+                                    </div>
+                                    <p class="vc-plan-title">{it.title}</p>
+                                    <p class="vc-plan-description">{it.description}</p>
+                                </li>
+                            </template>
+                        </ul>
+                    </section>
+                </template>
+            </div>
+        </template>
+
+        <template if:true={showConfirmModal}>
+            <section role="dialog" tabindex="-1" aria-modal="true" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <header class="slds-modal__header">
+                        <h2 class="slds-modal__title slds-hyphenate">{labels.modalRegenTitle}</h2>
+                    </header>
+                    <div class="slds-modal__content slds-p-around_medium">
+                        <p>{labels.modalRegenBody}</p>
+                        <p class="slds-m-top_x-small slds-text-body_small vc-muted">{labels.modalRegenNote}</p>
+                    </div>
+                    <footer class="slds-modal__footer">
+                        <lightning-button label={labels.modalCancel} onclick={handleCancelConfirm} class="slds-m-right_x-small"></lightning-button>
+                        <lightning-button label={labels.modalConfirm} variant="brand" onclick={handleConfirmRegen}></lightning-button>
+                    </footer>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </template>
+    </div>
+</template>

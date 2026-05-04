@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>64.0</apiVersion>
+    <description>Record-triggered flow on Event (After Save, Create only). Crée automatiquement une Visit_Capture__c liée à l'Account/Contact/Opportunity hérités de l'Event. Alimente le cockpit de visites en temps réel à partir de l'agenda.</description>
+    <environments>Default</environments>
+    <formulas>
+        <name>Event_Id_Text</name>
+        <dataType>String</dataType>
+        <expression>CASESAFEID({!$Record.Id})</expression>
+    </formulas>
+    <formulas>
+        <name>Contact_If_Contact</name>
+        <dataType>String</dataType>
+        <expression>IF(LEFT({!$Record.WhoId}, 3) = &quot;003&quot;, CASESAFEID({!$Record.WhoId}), NULL)</expression>
+    </formulas>
+    <formulas>
+        <name>Opportunity_If_Opportunity</name>
+        <dataType>String</dataType>
+        <expression>IF(LEFT({!$Record.WhatId}, 3) = &quot;006&quot;, CASESAFEID({!$Record.WhatId}), NULL)</expression>
+    </formulas>
+    <interviewLabel>Auto Create Visit Capture On Event {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Auto Create Visit Capture On Event</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordCreates>
+        <name>Create_Visit_Capture</name>
+        <label>Create Visit Capture</label>
+        <locationX>176</locationX>
+        <locationY>134</locationY>
+        <inputAssignments>
+            <field>Account__c</field>
+            <value>
+                <elementReference>$Record.AccountId</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Contact__c</field>
+            <value>
+                <elementReference>Contact_If_Contact</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Event__c</field>
+            <value>
+                <elementReference>Event_Id_Text</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Opportunity__c</field>
+            <value>
+                <elementReference>Opportunity_If_Opportunity</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Visit_Capture__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Create_Visit_Capture</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>AccountId</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </filters>
+        <filters>
+            <field>IsRecurrence</field>
+            <operator>EqualTo</operator>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </filters>
+        <object>Event</object>
+        <recordTriggerType>Create</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>

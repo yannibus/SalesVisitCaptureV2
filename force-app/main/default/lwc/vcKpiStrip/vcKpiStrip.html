@@ -1,0 +1,41 @@
+<template>
+    <div class="slds-grid slds-gutters_small slds-wrap vc-kpi-strip">
+        <template if:true={loading}>
+            <template for:each={skeletons} for:item="s">
+                <div key={s} class="slds-col slds-size_1-of-2 slds-large-size_1-of-6 slds-p-bottom_x-small">
+                    <div class="vc-kpi-card vc-kpi-skeleton">
+                        <div class="vc-skeleton-line"></div>
+                        <div class="vc-skeleton-line vc-skeleton-line_big"></div>
+                    </div>
+                </div>
+            </template>
+        </template>
+
+        <template if:true={error}>
+            <div class="slds-col slds-size_1-of-1">
+                <div class="slds-notify slds-notify_alert slds-alert_error">{error}</div>
+            </div>
+        </template>
+
+        <template for:each={kpis} for:item="kpi">
+            <div key={kpi.key} class="slds-col slds-size_1-of-2 slds-large-size_1-of-6 slds-p-bottom_x-small">
+                <div class={kpi.cardClass} data-tone={kpi.tone}>
+                    <p class="vc-kpi-label">{kpi.label}</p>
+                    <div class="vc-kpi-value">{kpi.value}</div>
+                    <p class="vc-kpi-description">{kpi.description}</p>
+                    <template if:true={kpi.delta}>
+                        <div class={kpi.deltaClass}>
+                            <template if:true={kpi.deltaUp}>
+                                <lightning-icon icon-name="utility:arrowup" size="xx-small" alternative-text={labels.deltaUp}></lightning-icon>
+                            </template>
+                            <template if:true={kpi.deltaDown}>
+                                <lightning-icon icon-name="utility:arrowdown" size="xx-small" alternative-text={labels.deltaDown}></lightning-icon>
+                            </template>
+                            <span class="slds-m-left_xx-small">{kpi.delta.label}</span>
+                        </div>
+                    </template>
+                </div>
+            </div>
+        </template>
+    </div>
+</template>

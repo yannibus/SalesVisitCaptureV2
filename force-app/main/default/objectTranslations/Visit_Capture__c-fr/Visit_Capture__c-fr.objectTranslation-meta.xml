@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Visite capturée</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Visites capturées</value>
+    </caseValues>
+    <fields>
+        <label>Compte</label>
+        <name>Account__c</name>
+        <relationshipLabel>Visites capturées</relationshipLabel>
+    </fields>
+    <fields>
+        <label>Plan d'action matérialisé</label>
+        <name>Action_Plan_Materialized__c</name>
+    </fields>
+    <fields>
+        <label>Plan d'action (JSON IA)</label>
+        <name>AI_Action_Plan__c</name>
+    </fields>
+    <fields>
+        <label>Compte-rendu (IA)</label>
+        <name>AI_Report__c</name>
+    </fields>
+    <fields>
+        <label>Contact</label>
+        <name>Contact__c</name>
+        <relationshipLabel>Visites capturées</relationshipLabel>
+    </fields>
+    <fields>
+        <label>Contexte démo</label>
+        <name>Demo_Context__c</name>
+        <relationshipLabel>Visites capturées</relationshipLabel>
+    </fields>
+    <fields>
+        <label>Langue détectée</label>
+        <name>Detected_Language__c</name>
+    </fields>
+    <fields>
+        <label>Événement d'origine</label>
+        <name>Event_Link__c</name>
+    </fields>
+    <fields>
+        <label>Opportunité</label>
+        <name>Opportunity__c</name>
+        <relationshipLabel>Visites capturées</relationshipLabel>
+    </fields>
+    <fields>
+        <label>VideoCall</label>
+        <name>VideoCall__c</name>
+        <relationshipLabel>Visites capturées</relationshipLabel>
+    </fields>
+    <fields>
+        <label>Notes libres</label>
+        <name>Visit_Summary__c</name>
+    </fields>
+    <fields>
+        <label>Transcription vocale</label>
+        <name>Voice_Transcript__c</name>
+    </fields>
+    <gender>Feminine</gender>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

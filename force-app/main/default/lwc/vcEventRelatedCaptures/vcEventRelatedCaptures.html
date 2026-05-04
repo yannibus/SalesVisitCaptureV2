@@ -1,0 +1,37 @@
+<template>
+    <article class="slds-card">
+        <div class="slds-card__header slds-p-horizontal_medium slds-p-vertical_small slds-grid slds-grid_vertical-align-center">
+            <lightning-icon icon-name="custom:custom18" size="small" class="slds-m-right_small"></lightning-icon>
+            <h2 class="slds-text-heading_small slds-truncate">{labels.title}</h2>
+        </div>
+        <div class="slds-card__body slds-p-around_medium">
+            <template if:true={error}>
+                <div class="slds-notify slds-notify_alert slds-alert_error">{error}</div>
+            </template>
+
+            <template if:false={hasCaptures}>
+                <p class="slds-text-body_small vc-muted slds-text-align_center slds-p-vertical_medium">{labels.empty}</p>
+            </template>
+
+            <template if:true={hasCaptures}>
+                <ul class="vc-captures-list">
+                    <template for:each={rows} for:item="r">
+                        <li key={r.id} class="vc-capture-row" onclick={handleOpen} data-id={r.id}>
+                            <div class="vc-capture-title">
+                                <span class="slds-text-body_regular slds-truncate">{r.accountName}</span>
+                                <span class={r.sourceBadgeClass}>{r.sourceBadgeLabel}</span>
+                            </div>
+                            <div class="vc-capture-meta">
+                                <span class="slds-text-body_small vc-muted">{r.contactName}</span>
+                            </div>
+                            <div class="vc-capture-badges slds-m-top_x-small">
+                                <span class={r.reportBadgeClass}>{r.reportBadgeLabel}</span>
+                                <span class={r.planBadgeClass}>{r.planBadgeLabel}</span>
+                            </div>
+                        </li>
+                    </template>
+                </ul>
+            </template>
+        </div>
+    </article>
+</template>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Meeting_Type__c</fullName>
+    <description>Type de rendez-vous commercial pour lequel la démo est préparée.</description>
+    <label>Meeting Type</label>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>false</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Découverte</fullName>
+                <default>true</default>
+                <label>Discovery</label>
+            </value>
+            <value>
+                <fullName>Pitch</fullName>
+                <default>false</default>
+                <label>Pitch</label>
+            </value>
+            <value>
+                <fullName>Démo</fullName>
+                <default>false</default>
+                <label>Demo</label>
+            </value>
+            <value>
+                <fullName>Négociation</fullName>
+                <default>false</default>
+                <label>Negotiation</label>
+            </value>
+            <value>
+                <fullName>Closing</fullName>
+                <default>false</default>
+                <label>Closing</label>
+            </value>
+            <value>
+                <fullName>Renouvellement</fullName>
+                <default>false</default>
+                <label>Renewal</label>
+            </value>
+            <value>
+                <fullName>QBR</fullName>
+                <default>false</default>
+                <label>QBR</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

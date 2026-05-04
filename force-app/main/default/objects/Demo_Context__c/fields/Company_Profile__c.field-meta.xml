@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Company_Profile__c</fullName>
+    <description>Généré par IA : profil synthétique de l'entreprise (taille, marché, positionnement, enjeux).</description>
+    <externalId>false</externalId>
+    <label>Company Profile (AI)</label>
+    <length>32768</length>
+    <trackTrending>false</trackTrending>
+    <type>LongTextArea</type>
+    <visibleLines>6</visibleLines>
+</CustomField>

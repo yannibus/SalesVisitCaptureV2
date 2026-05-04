@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <name>Run_Generator</name>
+        <label>Run report generator</label>
+        <locationX>176</locationX>
+        <locationY>134</locationY>
+        <actionName>VisitReportGenerator</actionName>
+        <actionType>apex</actionType>
+        <connector>
+            <targetReference>Show_Result</targetReference>
+        </connector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>visitCaptureId</name>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>VisitReportGenerator</nameSegment>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </actionCalls>
+    <apiVersion>64.0</apiVersion>
+    <description>Screen flow invoqué depuis la Quick Action &quot;Générer CR&quot; sur Visit_Capture__c. Appelle VisitReportGenerator Apex qui produit le CR IA et le plan d&apos;action JSON.</description>
+    <environments>Default</environments>
+    <interviewLabel>Generate Visit Report {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Generate Visit Report</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>Flow</processType>
+    <screens>
+        <name>Show_Result</name>
+        <label>Compte-rendu généré</label>
+        <locationX>176</locationX>
+        <locationY>254</locationY>
+        <allowBack>false</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+        <fields>
+            <name>ResultMessage</name>
+            <fieldText>&lt;p&gt;Le compte-rendu a été généré. Le plan d&apos;action est prêt à être matérialisé via l&apos;action &quot;Créer le plan d&apos;action&quot;.&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Run_Generator</targetReference>
+        </connector>
+    </start>
+    <status>Active</status>
+    <variables>
+        <name>recordId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+</Flow>

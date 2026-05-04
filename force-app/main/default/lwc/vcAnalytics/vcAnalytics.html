@@ -1,0 +1,110 @@
+<template>
+    <div class="slds-grid slds-gutters slds-wrap vc-analytics">
+        <div class="slds-col slds-size_1-of-1 slds-large-size_5-of-12">
+            <article class="slds-card vc-analytics-card">
+                <div class="slds-card__header slds-p-horizontal_medium slds-p-vertical_small">
+                    <h2 class="slds-text-heading_small">{labels.weeklyTitle}</h2>
+                    <p class="slds-text-body_small vc-muted">{labels.weeklyTotal} <strong>{weeklyTotal}</strong> {labels.visitsWord}</p>
+                </div>
+                <div class="slds-card__body slds-p-around_medium">
+                    <template if:true={hasWeekly}>
+                        <svg width="100%" viewBox="0 0 320 120" preserveAspectRatio="none" class="vc-sparkline">
+                            <defs>
+                                <linearGradient id="vcSparkGrad" x1="0" y1="0" x2="0" y2="1">
+                                    <stop offset="0%" stop-color="#0176d3" stop-opacity="0.35"></stop>
+                                    <stop offset="100%" stop-color="#0176d3" stop-opacity="0.02"></stop>
+                                </linearGradient>
+                            </defs>
+                            <path d={sparklineArea} fill="url(#vcSparkGrad)"></path>
+                            <path d={sparklinePath} fill="none" stroke="#0176d3" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                            <template for:each={sparklineDots} for:item="d">
+                                <circle key={d.key} cx={d.cx} cy={d.cy} r="3" fill="#0176d3">
+                                    <title>{d.label} : {d.count}</title>
+                                </circle>
+                            </template>
+                        </svg>
+                    </template>
+                    <template if:false={hasWeekly}>
+                        <p class="slds-text-body_small vc-muted slds-text-align_center slds-p-vertical_medium">{labels.weeklyNoData}</p>
+                    </template>
+                </div>
+            </article>
+        </div>
+
+        <div class="slds-col slds-size_1-of-1 slds-large-size_3-of-12">
+            <article class="slds-card vc-analytics-card">
+                <div class="slds-card__header slds-p-horizontal_medium slds-p-vertical_small">
+                    <h2 class="slds-text-heading_small">{labels.sourceTitle}</h2>
+                    <p class="slds-text-body_small vc-muted">{labels.weeklyTotal} <strong>{sourceTotal}</strong> {labels.visitsWord}</p>
+                </div>
+                <div class="slds-card__body slds-p-around_medium">
+                    <template if:true={hasSource}>
+                        <div class="vc-donut-wrapper">
+                            <svg width="150" height="150" viewBox="0 0 150 150" class="vc-donut">
+                                <circle cx={donutCx} cy={donutCy} r={donutR} fill="none" stroke="var(--slds-g-color-surface-container-2, #ecebea)" stroke-width="18"></circle>
+                                <template for:each={donutSegments} for:item="seg">
+                                    <circle
+                                        key={seg.key}
+                                        cx={donutCx}
+                                        cy={donutCy}
+                                        r={seg.r}
+                                        fill="none"
+                                        stroke={seg.color}
+                                        stroke-width="18"
+                                        stroke-dasharray={seg.dashArray}
+                                        stroke-dashoffset={seg.dashOffset}
+                                        transform="rotate(-90 75 75)">
+                                        <title>{seg.label} : {seg.value}</title>
+                                    </circle>
+                                </template>
+                                <text x="75" y="70" text-anchor="middle" class="vc-donut-total">{sourceTotal}</text>
+                                <text x="75" y="88" text-anchor="middle" class="vc-donut-label">{labels.visitsWord}</text>
+                            </svg>
+                            <ul class="vc-donut-legend">
+                                <template for:each={donutSegments} for:item="seg">
+                                    <li key={seg.key} class="vc-legend-item">
+                                        <span class="vc-legend-dot" style={seg.dotStyle} data-color={seg.color}></span>
+                                        <span class="vc-legend-label">{seg.label}</span>
+                                        <span class="vc-legend-value">{seg.value} ({seg.pct}%)</span>
+                                    </li>
+                                </template>
+                            </ul>
+                        </div>
+                    </template>
+                    <template if:false={hasSource}>
+                        <p class="slds-text-body_small vc-muted slds-text-align_center slds-p-vertical_medium">{labels.sourceNoData}</p>
+                    </template>
+                </div>
+            </article>
+        </div>
+
+        <div class="slds-col slds-size_1-of-1 slds-large-size_4-of-12">
+            <article class="slds-card vc-analytics-card">
+                <div class="slds-card__header slds-p-horizontal_medium slds-p-vertical_small">
+                    <h2 class="slds-text-heading_small">{labels.topTitle}</h2>
+                </div>
+                <div class="slds-card__body slds-p-around_medium">
+                    <template if:true={hasTopAccounts}>
+                        <ul class="vc-top-accounts-list">
+                            <template for:each={topAccountsWithWidth} for:item="a">
+                                <li key={a.accountId} class="vc-top-account-item">
+                                    <div class="vc-top-account-header">
+                                        <span class="vc-top-account-name slds-truncate" title={a.accountName}>{a.accountName}</span>
+                                        <span class="vc-top-account-count">{a.visitCount}</span>
+                                    </div>
+                                    <div class="vc-top-account-bar-track">
+                                        <div class="vc-top-account-bar-fill" style={a.widthStyle}></div>
+                                    </div>
+                                    <span class="vc-top-account-last">{labels.lastVisit} {a.lastVisitLabel}</span>
+                                </li>
+                            </template>
+                        </ul>
+                    </template>
+                    <template if:false={hasTopAccounts}>
+                        <p class="slds-text-body_small vc-muted slds-text-align_center slds-p-vertical_medium">{labels.topNoData}</p>
+                    </template>
+                </div>
+            </article>
+        </div>
+    </div>
+</template>

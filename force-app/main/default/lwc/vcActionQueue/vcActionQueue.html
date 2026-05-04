@@ -1,0 +1,52 @@
+<template>
+    <article class="slds-card vc-queue-card">
+        <div class={headerClass}>
+            <lightning-icon icon-name={headerIcon} size="small" alternative-text="" class="slds-m-right_small"></lightning-icon>
+            <h2 class="slds-text-heading_small slds-truncate">{title}</h2>
+            <template if:true={count}>
+                <span class="vc-queue-count">{count}</span>
+            </template>
+        </div>
+
+        <div class="slds-card__body slds-p-around_none vc-queue-body">
+            <template if:true={loading}>
+                <div class="slds-p-around_medium slds-text-align_center">
+                    <lightning-spinner alternative-text={labels.loading} size="small"></lightning-spinner>
+                </div>
+            </template>
+
+            <template if:true={isEmpty}>
+                <div class="vc-queue-empty slds-p-around_medium slds-text-align_center">
+                    <lightning-icon icon-name="utility:success" size="small" variant="success" alternative-text="OK"></lightning-icon>
+                    <p class="slds-m-top_x-small slds-text-body_regular">{emptyMessage}</p>
+                </div>
+            </template>
+
+            <template if:false={isEmpty}>
+                <ul class="vc-queue-list">
+                    <template for:each={items} for:item="it">
+                        <li key={it.id} class="vc-queue-item">
+                            <div class="vc-queue-item-main">
+                                <div class="vc-queue-item-title">
+                                    <span class="slds-text-body_regular slds-truncate">{it.accountName}</span>
+                                    <span class={it.badgeClass}>{it.badgeLabel}</span>
+                                </div>
+                                <div class="vc-queue-item-meta">
+                                    <span class="slds-text-body_small">{it.contactName}</span>
+                                    <span class="slds-text-body_small vc-queue-item-staleness">{it.staleness}</span>
+                                </div>
+                            </div>
+                            <lightning-button
+                                label={it.buttonLabel}
+                                variant={it.buttonVariant}
+                                data-id={it.id}
+                                onclick={handleOpen}
+                                class="vc-queue-item-button">
+                            </lightning-button>
+                        </li>
+                    </template>
+                </ul>
+            </template>
+        </div>
+    </article>
+</template>

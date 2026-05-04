@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>AI_Action_Plan__c</fullName>
+    <description>Plan d&apos;action en JSON structuré généré par le prompt CR : liste d&apos;items {type, title, description, owner, dueDate, startDateTime?, durationMinutes?}. Consommé par le flow Materialize_Action_Plan.</description>
+    <externalId>false</externalId>
+    <label>Plan d&apos;action (JSON IA)</label>
+    <length>32768</length>
+    <trackTrending>false</trackTrending>
+    <type>LongTextArea</type>
+    <visibleLines>10</visibleLines>
+</CustomField>

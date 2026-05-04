@@ -1,0 +1,45 @@
+<template>
+    <article class="slds-card vc-recent-card">
+        <div class="slds-card__header slds-p-horizontal_medium slds-p-vertical_small slds-grid slds-grid_vertical-align-center slds-grid_align-spread">
+            <h2 class="slds-text-heading_small">{labels.title}</h2>
+            <span class="slds-text-body_small vc-muted">{labels.subtitle}</span>
+        </div>
+        <div class="slds-card__body slds-p-around_none">
+            <template if:true={hasVisits}>
+                <table class="vc-table">
+                    <thead>
+                        <tr>
+                            <th>{labels.colDate}</th>
+                            <th>{labels.colAccount}</th>
+                            <th>{labels.colContact}</th>
+                            <th>{labels.colSource}</th>
+                            <th>{labels.colReport}</th>
+                            <th>{labels.colPlan}</th>
+                            <th>{labels.colLanguage}</th>
+                            <th class="vc-action-col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <template for:each={rows} for:item="r">
+                            <tr key={r.id}>
+                                <td>{r.dateLabel}</td>
+                                <td class="vc-col-strong">{r.accountName}</td>
+                                <td>{r.contactName}</td>
+                                <td><span class={r.sourceBadgeClass}>{r.source}</span></td>
+                                <td><span class={r.reportBadgeClass} title={r.reportLabel}>{r.reportStatus}</span></td>
+                                <td><span class={r.planBadgeClass} title={r.planLabel}>{r.planStatus}</span></td>
+                                <td class="vc-col-lang">{r.language}</td>
+                                <td class="vc-action-col">
+                                    <button class="slds-button slds-button_neutral vc-row-button" data-id={r.id} onclick={handleOpen}>{labels.open}</button>
+                                </td>
+                            </tr>
+                        </template>
+                    </tbody>
+                </table>
+            </template>
+            <template if:false={hasVisits}>
+                <p class="slds-text-body_small vc-muted slds-text-align_center slds-p-vertical_medium">{labels.empty}</p>
+            </template>
+        </div>
+    </article>
+</template>
