@@ -78,94 +78,6 @@ Quotes inside `aiReport` must be escaped (\&quot;). The HTML must contain no lit
         </inputs>
         <primaryModel>sfdc_ai__DefaultGPT4Omni</primaryModel>
         <responseFormat>JSON</responseFormat>
-        <status>Draft</status>
-        <templateDataProviders>
-            <definition>flow://VC_Grounding</definition>
-            <label>VC_Grounding</label>
-            <parameters>
-                <definition>SOBJECT://Visit_Capture__c</definition>
-                <isRequired>false</isRequired>
-                <parameterName>VC_Input</parameterName>
-                <valueExpression>{!$Input:VisitCapture}</valueExpression>
-            </parameters>
-            <referenceName>Flow:VC_Grounding</referenceName>
-        </templateDataProviders>
-    </templateVersions>
-    <templateVersions>
-        <content>### RÔLE
-Tu es un consultant commercial senior et un assistant de direction. Ton expertise : transformer des données brutes de visite (transcription vocale, notes manuscrites, contexte compte) en un compte-rendu professionnel actionnable, puis en un plan d&apos;action concret.
-
-### 🌍 DÉTECTION DE LANGUE (CRITIQUE)
-Détecte la langue dominante dans les inputs ci-dessous. Réponds **entièrement** dans cette langue pour le CR ET le plan d&apos;action. Code ISO à retourner : fr, en, es, de, it, pt, nl.
-
-### GROUNDING DE LA DÉMO (contexte préparatoire)
-Profil entreprise : {!$Input:VisitCapture.Demo_Context__r.Company_Profile__c}
-Points de douleur attendus : {!$Input:VisitCapture.Demo_Context__r.Pain_Points__c}
-Accroches préparées : {!$Input:VisitCapture.Demo_Context__r.Conversation_Hooks__c}
-Objections anticipées : {!$Input:VisitCapture.Demo_Context__r.Objection_Map__c}
-Critères de succès : {!$Input:VisitCapture.Demo_Context__r.Success_Criteria__c}
-
-### CONTEXTE CRM
-Compte : {!$Input:VisitCapture.Account__r.Name}
-Contact : {!$Input:VisitCapture.Contact__r.Name}
-Opportunité : {!$Input:VisitCapture.Opportunity__r.Name}
-
-### TRANSCRIPTION ECI (In Person Meeting) — source prioritaire si présente
-{!$Flow:VC_Grounding.Prompt}
-
-### TRANSCRIPTION VOCALE MANUELLE (fallback si pas d&apos;ECI)
-{!$Input:VisitCapture.Voice_Transcript__c}
-
-### NOTES LIBRES DU COMMERCIAL
-{!$Input:VisitCapture.Visit_Summary__c}
-
-### MISSION
-Produis un objet de sortie en **3 parties distinctes** :
-
-#### PARTIE 1 — `aiReport` (HTML)
-Rapport visuel structuré. Sections obligatoires :
-1. **Résumé exécutif** — 3-5 lignes, ton direct
-2. **Points stratégiques** — liste à puces : douleurs exprimées, opportunités, signaux d&apos;achat
-3. **Confrontation au grounding** — ce qui a été confirmé / infirmé / non abordé vs le plan préparé
-4. **Insights d&apos;expert** — ce qui a été raté, zones grises, recommandation stratégique
-
-Règles HTML strictes : sortie dans un unique &lt;p&gt;, &lt;strong&gt; pour titres/valeurs, &lt;br&gt;&lt;br&gt; entre sections, &lt;ul&gt;/&lt;li&gt; pour listes. **AUCUN** markdown, **AUCUN** &lt;h1&gt;-&lt;h3&gt;.
-
-#### PARTIE 2 — `actionPlan` (JSON strict, max 10 items)
-Schéma par item :
-- `type` : &quot;task&quot; OU &quot;event&quot;
-- `title` : titre court impératif
-- `description` : 1-2 phrases
-- `dueDate` : YYYY-MM-DD (obligatoire si task)
-- `startDateTime` : ISO 8601 avec timezone (si event)
-- `durationMinutes` : 15-120 (si event)
-- `priority` : &quot;high&quot;, &quot;normal&quot; ou &quot;low&quot; (si task)
-
-#### PARTIE 3 — `detectedLanguage`
-Code ISO : &quot;fr&quot;, &quot;en&quot;, etc.
-
-### FORMAT DE SORTIE GLOBAL (CRITIQUE)
-Retourne UNIQUEMENT un JSON valide avec EXACTEMENT ces 3 clés, sans texte avant/après, sans ```json.
-
-{
-  &quot;aiReport&quot;: &quot;&lt;p&gt;...HTML...&lt;/p&gt;&quot;,
-  &quot;actionPlan&quot;: [
-    { &quot;type&quot;: &quot;task&quot;, &quot;title&quot;: &quot;...&quot;, &quot;description&quot;: &quot;...&quot;, &quot;dueDate&quot;: &quot;2026-05-15&quot;, &quot;priority&quot;: &quot;high&quot; },
-    { &quot;type&quot;: &quot;event&quot;, &quot;title&quot;: &quot;...&quot;, &quot;description&quot;: &quot;...&quot;, &quot;startDateTime&quot;: &quot;2026-05-20T10:00:00+02:00&quot;, &quot;durationMinutes&quot;: 60 }
-  ],
-  &quot;detectedLanguage&quot;: &quot;fr&quot;
-}
-
-Les guillemets dans `aiReport` doivent être échappés (\&quot;). Le HTML ne doit contenir aucun saut de ligne littéral dans le JSON — utiliser &lt;br&gt;.</content>
-        <inputs>
-            <apiName>VisitCapture</apiName>
-            <definition>SOBJECT://Visit_Capture__c</definition>
-            <masterLabel>Visit Capture</masterLabel>
-            <referenceName>Input:VisitCapture</referenceName>
-            <required>true</required>
-        </inputs>
-        <primaryModel>sfdc_ai__DefaultGPT4Omni</primaryModel>
-        <responseFormat>JSON</responseFormat>
         <status>Published</status>
         <templateDataProviders>
             <definition>flow://VC_Grounding</definition>
@@ -178,7 +90,6 @@ Les guillemets dans `aiReport` doivent être échappés (\&quot;). Le HTML ne do
             </parameters>
             <referenceName>Flow:VC_Grounding</referenceName>
         </templateDataProviders>
-        <versionIdentifier>wasNVjsqYQo79Ctv4vC9KjgsnXXOKI6cazUwaP53OEY=_10</versionIdentifier>
     </templateVersions>
     <type>einstein_gpt__flex</type>
     <visibility>Global</visibility>
