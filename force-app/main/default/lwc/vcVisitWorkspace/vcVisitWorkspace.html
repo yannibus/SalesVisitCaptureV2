@@ -44,8 +44,8 @@
                         </div>
                         <p class="vc-demo-zone-hint">{labels.demoZoneHint}</p>
                         <div class="vc-demo-zone-body">
-                            <lightning-record-edit-form record-id={recordId} object-api-name="Visit_Capture__c" onsuccess={handleRecordFieldChange}>
-                                <lightning-input-field field-name="Demo_Context__c" variant="label-hidden"></lightning-input-field>
+                            <lightning-record-edit-form record-id={recordId} object-api-name="Visit_Capture__c">
+                                <lightning-input-field field-name="Demo_Context__c" variant="label-hidden" onchange={handleLookupChange}></lightning-input-field>
                             </lightning-record-edit-form>
                             <template if:true={hasDemoContext}>
                                 <div class="vc-demo-summary">
@@ -61,16 +61,16 @@
                             <h3 class="vc-card-title">{labels.crmTitle}</h3>
                             <span class="vc-step-pill">{labels.prepStep2}</span>
                         </header>
-                        <lightning-record-edit-form record-id={recordId} object-api-name="Visit_Capture__c" onsuccess={handleRecordFieldChange}>
+                        <lightning-record-edit-form record-id={recordId} object-api-name="Visit_Capture__c">
                             <div class="slds-grid slds-gutters slds-wrap">
                                 <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-3">
-                                    <lightning-input-field field-name="Account__c"></lightning-input-field>
+                                    <lightning-input-field field-name="Account__c" onchange={handleLookupChange}></lightning-input-field>
                                 </div>
                                 <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-3">
-                                    <lightning-input-field field-name="Contact__c"></lightning-input-field>
+                                    <lightning-input-field field-name="Contact__c" onchange={handleLookupChange}></lightning-input-field>
                                 </div>
                                 <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-3">
-                                    <lightning-input-field field-name="Opportunity__c"></lightning-input-field>
+                                    <lightning-input-field field-name="Opportunity__c" onchange={handleLookupChange}></lightning-input-field>
                                 </div>
                             </div>
                         </lightning-record-edit-form>
@@ -126,8 +126,8 @@
                         <header class="vc-card-header">
                             <h3 class="vc-card-title">{labels.videoCallLabel}</h3>
                         </header>
-                        <lightning-record-edit-form record-id={recordId} object-api-name="Visit_Capture__c" onsuccess={handleRecordFieldChange}>
-                            <lightning-input-field field-name="VideoCall__c" variant="label-hidden"></lightning-input-field>
+                        <lightning-record-edit-form record-id={recordId} object-api-name="Visit_Capture__c">
+                            <lightning-input-field field-name="VideoCall__c" variant="label-hidden" onchange={handleLookupChange}></lightning-input-field>
                         </lightning-record-edit-form>
                         <template if:true={hasEciTranscript}>
                             <div class="vc-eci-block slds-m-top_small">

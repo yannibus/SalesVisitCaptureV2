@@ -1,5 +1,6 @@
 import { LightningElement, api, wire, track } from 'lwc';
 import { refreshApex } from '@salesforce/apex';
+import { updateRecord } from 'lightning/uiRecordApi';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import { NavigationMixin } from 'lightning/navigation';
 import getDetail from '@salesforce/apex/VisitCockpitController.getDetail';
@@ -307,6 +308,23 @@ export default class VcVisitWorkspace extends NavigationMixin(LightningElement) 
 
     handleRecordFieldChange() {
         refreshApex(this.wiredResult);
+    }
+
+    async handleLookupChange(event) {
+        const fieldName = event.target.fieldName;
+        const value = event.detail.value;
+        const normalized = Array.isArray(value) ? (value[0] || null) : (value || null);
+        try {
+            await updateRecord({
+                fields: {
+                    Id: this.recordId,
+                    [fieldName]: normalized
+                }
+            });
+            await refreshApex(this.wiredResult);
+        } catch (e) {
+            this.toast('error', VC_Toast_SaveFailed, e.body ? e.body.message : VC_Toast_NetworkError);
+        }
     }
 
     async handleGenerateReport() {
