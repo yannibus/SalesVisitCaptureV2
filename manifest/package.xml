@@ -113,7 +113,7 @@
         <members>vcActionQueue</members>
         <members>vcAnalytics</members>
         <members>vcCockpit</members>
-        <members>vcEventRelatedCaptures</members>
+        <members>vcEventVisitCard</members>
         <members>vcKpiStrip</members>
         <members>vcRecentVisits</members>
         <members>vcVisitDetail</members>

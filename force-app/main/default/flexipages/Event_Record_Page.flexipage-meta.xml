@@ -34,8 +34,8 @@
     <flexiPageRegions>
         <itemInstances>
             <componentInstance>
-                <componentName>c:vcEventRelatedCaptures</componentName>
-                <identifier>c_vcEventRelatedCaptures</identifier>
+                <componentName>c:vcEventVisitCard</componentName>
+                <identifier>c_vcEventVisitCard</identifier>
             </componentInstance>
         </itemInstances>
         <itemInstances>

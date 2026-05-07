@@ -236,6 +236,68 @@ public with sharing class VisitCockpitController {
     }
 
     @AuraEnabled(cacheable=true)
+    public static EventVisitPayload getVisitForEvent(Id eventId) {
+        EventVisitPayload p = new EventVisitPayload();
+        if (eventId == null) {
+            p.visit = null;
+            p.hasDemoContext = false;
+            return p;
+        }
+        String eventIdText = String.valueOf(eventId);
+        List<Visit_Capture__c> rows = [
+            SELECT Id, Name,
+                   Account__c, Account__r.Name,
+                   Contact__c, Contact__r.Name,
+                   Opportunity__c, Opportunity__r.Name,
+                   Demo_Context__c,
+                   Demo_Context__r.Account_Name__c,
+                   Demo_Context__r.Meeting_Type__c,
+                   Demo_Context__r.Industry__c,
+                   AI_Visit_Brief__c
+            FROM Visit_Capture__c
+            WHERE Event__c = :eventIdText
+            ORDER BY CreatedDate DESC
+            LIMIT 1
+        ];
+        p.visit = rows.isEmpty() ? null : rows[0];
+        p.hasDemoContext = !rows.isEmpty() && rows[0].Demo_Context__c != null;
+        return p;
+    }
+
+    @AuraEnabled
+    public static Id createVisitForEvent(Id eventId) {
+        if (eventId == null) {
+            throw new AuraHandledException('Event Id is required.');
+        }
+        List<Event> events = [
+            SELECT Id, AccountId, WhoId, WhatId
+            FROM Event
+            WHERE Id = :eventId
+            LIMIT 1
+        ];
+        if (events.isEmpty()) {
+            throw new AuraHandledException('Event not found.');
+        }
+        Event evt = events[0];
+        Visit_Capture__c vc = new Visit_Capture__c();
+        vc.Event__c = String.valueOf(evt.Id);
+        vc.Account__c = evt.AccountId;
+        if (evt.WhoId != null && String.valueOf(evt.WhoId).startsWith('003')) {
+            vc.Contact__c = (Id) evt.WhoId;
+        }
+        if (evt.WhatId != null && String.valueOf(evt.WhatId).startsWith('006')) {
+            vc.Opportunity__c = (Id) evt.WhatId;
+        }
+        insert vc;
+        return vc.Id;
+    }
+
+    public class EventVisitPayload {
+        @AuraEnabled public Visit_Capture__c visit;
+        @AuraEnabled public Boolean hasDemoContext;
+    }
+
+    @AuraEnabled(cacheable=true)
     public static DetailPayload getDetail(Id visitId) {
         DetailPayload d = new DetailPayload();
         d.visit = [

@@ -1,0 +1,85 @@
+<template>
+    <article class="vc-event-card">
+        <header class="vc-event-header">
+            <lightning-icon icon-name="utility:magicwand" size="x-small" class="vc-event-icon"></lightning-icon>
+            <h2 class="vc-event-title">{labels.title}</h2>
+            <template if:true={hasVisit}>
+                <button class="vc-link-btn" onclick={handleOpenFullVisit}>{labels.openFull} →</button>
+            </template>
+        </header>
+
+        <div class="vc-event-body">
+            <template if:true={loading}>
+                <div class="vc-loading">
+                    <lightning-spinner alternative-text={labels.loading} size="small"></lightning-spinner>
+                </div>
+            </template>
+
+            <template if:true={error}>
+                <div class="slds-notify slds-notify_alert slds-alert_error">{error}</div>
+            </template>
+
+            <template if:false={loading}>
+                <template if:false={hasVisit}>
+                    <div class="vc-empty">
+                        <p class="vc-empty-msg">{labels.empty}</p>
+                        <button class="vc-primary-btn" onclick={handleCreate} disabled={creating}>
+                            <template if:true={creating}>
+                                <lightning-spinner alternative-text={labels.loading} size="x-small" variant="inverse"></lightning-spinner>
+                            </template>
+                            <template if:false={creating}>
+                                <lightning-icon icon-name="utility:add" size="x-small" variant="inverse"></lightning-icon>
+                            </template>
+                            <span>{labels.prepare}</span>
+                        </button>
+                    </div>
+                </template>
+
+                <template if:true={hasVisit}>
+                    <section class="vc-section vc-demo-zone">
+                        <div class="vc-section-header">
+                            <span class="vc-section-eyebrow">{labels.demoSection}</span>
+                        </div>
+                        <template if:true={hasDemoContext}>
+                            <div class="vc-demo-summary">
+                                <span class="vc-demo-summary-text">{demoSummary}</span>
+                                <button class="vc-link-btn" onclick={handleOpenDemoContext}>{labels.openDemoContext} →</button>
+                            </div>
+                        </template>
+                        <template if:false={hasDemoContext}>
+                            <p class="vc-empty-hint">—</p>
+                        </template>
+                    </section>
+
+                    <section class="vc-section vc-brief-section">
+                        <div class="vc-section-header">
+                            <span class="vc-section-eyebrow">{labels.briefSection}</span>
+                            <button class="vc-ai-btn" onclick={handleGenerateBrief} disabled={generating}>
+                                <lightning-icon icon-name="utility:einstein" size="xx-small" variant="inverse"></lightning-icon>
+                                <span>{briefButtonLabel}</span>
+                            </button>
+                        </div>
+
+                        <template if:true={generating}>
+                            <div class="vc-brief-loading">
+                                <lightning-spinner alternative-text={labels.generating} size="small"></lightning-spinner>
+                                <span class="slds-m-left_small">{labels.generating}</span>
+                            </div>
+                        </template>
+
+                        <template if:false={generating}>
+                            <template if:true={hasBrief}>
+                                <div class="vc-brief-content">
+                                    <lightning-formatted-rich-text value={briefHtml}></lightning-formatted-rich-text>
+                                </div>
+                            </template>
+                            <template if:false={hasBrief}>
+                                <p class="vc-empty-hint">{labels.briefEmpty}</p>
+                            </template>
+                        </template>
+                    </section>
+                </template>
+            </template>
+        </div>
+    </article>
+</template>

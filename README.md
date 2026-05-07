@@ -63,7 +63,7 @@ A record-triggered flow `Auto_Create_Visit_Capture_On_Event` automatically creat
 |---|---|---|
 | `vcVisitWorkspace` | Visit_Capture record page | Immersive 3-tab workspace (Preparation → Execution → Outcome) with AI actions |
 | `vcCockpit` + 5 children | `/lightning/n/Visit_Cockpit` | Single-page dashboard: 6 KPIs, 2 action queues, analytics, recent visits, side drawer detail |
-| `vcEventRelatedCaptures` | Event record page (Related tab) | Mini-list of Visit Captures linked to the source Event |
+| `vcEventVisitCard` | Event record page (Related tab) | Inline Demo Context summary + AI Visit Brief for the visit linked to the Event — no extra click |
 
 All components are **fully bilingual** (English by default, French when the user's Language is set to French) via Custom Labels + translations.
 
@@ -122,7 +122,7 @@ All prompts use the `{!$User.LanguageLocaleKey}` merge field so the output follo
 - **`VisitBriefGenerator`** — invokes `Prepare_Visit_Brief`, writes HTML into `AI_Visit_Brief__c`
 - **`VisitReportGenerator`** — invokes `Generate_Visit_Report`, writes report + plan + language
 - **`ActionPlanMaterializer`** — parses the JSON action plan, creates Tasks + Events linked to the visit
-- **`VisitCockpitController`** — AuraEnabled controller backing all LWC (getSummary, getMissingReports, getRecentVisits, getDetail, saveField, regenerateReport, materializePlan, generateBrief, getCapturesForEvent, searchDemoContexts…)
+- **`VisitCockpitController`** — AuraEnabled controller backing all LWC (getSummary, getMissingReports, getRecentVisits, getDetail, saveField, regenerateReport, materializePlan, generateBrief, getVisitForEvent, createVisitForEvent, searchDemoContexts…)
 
 ### Flows
 - **`Generate_Demo_Grounding`** (Screen) → invoked by Demo_Context Quick Action
@@ -141,7 +141,7 @@ All prompts use the `{!$User.LanguageLocaleKey}` merge field so the output follo
 - **FlexiPages**:
   - `Visit_Cockpit_Page` — hosts the single-page cockpit
   - `Visit_Capture_Record_Page` — full-width record page with `vcVisitWorkspace`
-  - `Event_Record_Page` — patched with `vcVisitRelatedCaptures` in the Related tab
+  - `Event_Record_Page` — patched with `vcEventVisitCard` in the Related tab (Demo Context summary + AI Visit Brief inline, no click required)
 
 ### Internationalization
 - **Custom Labels**: ~110 labels, all in English by default, categorized `VisitCapture`
@@ -197,15 +197,17 @@ Grant app visibility either via the permset (already done if step 1 passed) or P
 ### 5. Activate the Visit Capture Workspace page
 Setup → Lightning App Builder → open **Visit Capture Workspace** → **Activation** → "Org Default" (or assign to specific app/profile). Without this, opening a Visit Capture still shows the standard layout instead of the 3-tab workspace.
 
-### 6. Add the `Visit Captures Linked` component to the Event record page (**mandatory**)
-The package ships the LWC `vcEventRelatedCaptures` but it is **not auto-inserted** on the Event record page your org uses (Salesforce's default Event page cannot be replaced by metadata). You must drop it manually:
+### 6. Activate the patched Event Record Page (**mandatory**)
+The package ships an Event Record Page (`Event_Record_Page.flexipage-meta.xml`) that already embeds `vcEventVisitCard` in the Related tab — so the **Demo Context summary + AI Visit Brief show up inline** the moment a sales rep opens an Event, with zero extra click.
 
-1. Open any Event record in your org
-2. Top-right gear ⚙️ → **Edit Page**
-3. In the left palette → **Custom** section → drag **"Visites capturées liées"** (api name `c:vcEventRelatedCaptures`) into the **Related** tab, above the standard Related List
-4. **Save** → **Activate** → assign to "Org Default" (or to the `Sales Visits` app + System Administrator profile)
+But Salesforce never activates a deployed Lightning Record Page automatically. You must do it once:
 
-Without this step, Visit Captures auto-created from Events will exist in the CRM but the user won't see the shortcut from the Event fiche.
+1. Setup → **Lightning App Builder** → open **Event Record Page**
+2. Click **Activation…** → **Org Default** (or assign to the `Sales Visits` app + the relevant profiles)
+3. **Save**
+4. **Mobile:** if your org uses a separate **Phone** form-factor view, switch the App Builder canvas to it and confirm `vcEventVisitCard` is present (the bundle declares `Small` + `Large` form factors). Drop it manually if missing, then save and activate the Phone view.
+
+Without this step, opening an Event shows the standard layout and the visit preparation card stays invisible.
 
 ### 7. (Optional) Switch a user to French to test i18n
 Setup → Users → User → **Language = French** → logout/login → all UI strings and AI outputs switch to French seamlessly.
