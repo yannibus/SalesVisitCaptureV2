@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomApplication xmlns="http://soap.sforce.com/2006/04/metadata">
+    <brand>
+        <headerColor>#0176D3</headerColor>
+        <logo>sales_visits_logo</logo>
+        <shouldOverrideOrgTheme>false</shouldOverrideOrgTheme>
+    </brand>
+    <description>Console Lightning pour piloter les visites commerciales : cockpit bilan, agenda, video calls, capture de visite, contexte démo.</description>
+    <formFactors>Large</formFactors>
+    <isNavAutoTempTabsDisabled>false</isNavAutoTempTabsDisabled>
+    <isNavPersonalizationDisabled>false</isNavPersonalizationDisabled>
+    <isNavTabPersistenceDisabled>false</isNavTabPersistenceDisabled>
+    <label>Sales Visits</label>
+    <navType>Console</navType>
+    <tabs>Visit_Cockpit</tabs>
+    <tabs>standard-Event</tabs>
+    <tabs>standard-VideoCall</tabs>
+    <tabs>Visit_Capture__c</tabs>
+    <tabs>Demo_Context__c</tabs>
+    <tabs>standard-Account</tabs>
+    <tabs>standard-Contact</tabs>
+    <tabs>standard-Opportunity</tabs>
+    <uiType>Lightning</uiType>
+    <workspaceConfig>
+        <mappings>
+            <tab>Visit_Cockpit</tab>
+        </mappings>
+        <mappings>
+            <tab>standard-Event</tab>
+        </mappings>
+        <mappings>
+            <tab>standard-VideoCall</tab>
+        </mappings>
+        <mappings>
+            <tab>Visit_Capture__c</tab>
+        </mappings>
+        <mappings>
+            <tab>Demo_Context__c</tab>
+        </mappings>
+        <mappings>
+            <tab>standard-Account</tab>
+        </mappings>
+        <mappings>
+            <tab>standard-Contact</tab>
+        </mappings>
+        <mappings>
+            <tab>standard-Opportunity</tab>
+        </mappings>
+    </workspaceConfig>
+</CustomApplication>
