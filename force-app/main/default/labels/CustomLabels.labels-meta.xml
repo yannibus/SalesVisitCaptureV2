@@ -233,6 +233,14 @@
         <categories>VisitCapture</categories>
     </labels>
     <labels>
+        <fullName>VC_Cockpit_Eyebrow</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>VC_Cockpit_Eyebrow</shortDescription>
+        <value>Visit Capture</value>
+        <categories>VisitCapture</categories>
+    </labels>
+    <labels>
         <fullName>VC_Cockpit_Title</fullName>
         <language>en_US</language>
         <protected>false</protected>
@@ -649,19 +657,51 @@
         <categories>VisitCapture</categories>
     </labels>
     <labels>
-        <fullName>VC_EventRelated_Title</fullName>
+        <fullName>VC_EventVisit_Title</fullName>
         <language>en_US</language>
         <protected>false</protected>
-        <shortDescription>VC_EventRelated_Title</shortDescription>
-        <value>Linked visit captures</value>
+        <shortDescription>VC_EventVisit_Title</shortDescription>
+        <value>Visit preparation</value>
         <categories>VisitCapture</categories>
     </labels>
     <labels>
-        <fullName>VC_EventRelated_Empty</fullName>
+        <fullName>VC_EventVisit_Empty</fullName>
         <language>en_US</language>
         <protected>false</protected>
-        <shortDescription>VC_EventRelated_Empty</shortDescription>
-        <value>No visit linked to this event.</value>
+        <shortDescription>VC_EventVisit_Empty</shortDescription>
+        <value>No visit linked to this event yet.</value>
+        <categories>VisitCapture</categories>
+    </labels>
+    <labels>
+        <fullName>VC_EventVisit_Prepare</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>VC_EventVisit_Prepare</shortDescription>
+        <value>Prepare this visit</value>
+        <categories>VisitCapture</categories>
+    </labels>
+    <labels>
+        <fullName>VC_EventVisit_OpenFull</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>VC_EventVisit_OpenFull</shortDescription>
+        <value>Open full visit</value>
+        <categories>VisitCapture</categories>
+    </labels>
+    <labels>
+        <fullName>VC_EventVisit_DemoSection</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>VC_EventVisit_DemoSection</shortDescription>
+        <value>Demo Context</value>
+        <categories>VisitCapture</categories>
+    </labels>
+    <labels>
+        <fullName>VC_EventVisit_BriefSection</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>VC_EventVisit_BriefSection</shortDescription>
+        <value>AI Visit Brief</value>
         <categories>VisitCapture</categories>
     </labels>
     <labels>

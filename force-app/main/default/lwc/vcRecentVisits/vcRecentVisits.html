@@ -1,10 +1,10 @@
 <template>
-    <article class="slds-card vc-recent-card">
-        <div class="slds-card__header slds-p-horizontal_medium slds-p-vertical_small slds-grid slds-grid_vertical-align-center slds-grid_align-spread">
-            <h2 class="slds-text-heading_small">{labels.title}</h2>
-            <span class="slds-text-body_small vc-muted">{labels.subtitle}</span>
-        </div>
-        <div class="slds-card__body slds-p-around_none">
+    <article class="vc-recent-card">
+        <header class="vc-recent-header">
+            <h2 class="vc-recent-title">{labels.title}</h2>
+            <span class="vc-muted">{labels.subtitle}</span>
+        </header>
+        <div>
             <template if:true={hasVisits}>
                 <table class="vc-table">
                     <thead>
@@ -38,7 +38,7 @@
                 </table>
             </template>
             <template if:false={hasVisits}>
-                <p class="slds-text-body_small vc-muted slds-text-align_center slds-p-vertical_medium">{labels.empty}</p>
+                <p class="vc-empty">{labels.empty}</p>
             </template>
         </div>
     </article>

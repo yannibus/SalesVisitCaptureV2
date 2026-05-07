@@ -2,7 +2,7 @@
 <Translations xmlns="http://soap.sforce.com/2006/04/metadata">
     <customApplications>
         <label>Visites commerciales</label>
-        <name>Visit_Cockpit_App</name>
+        <name>Sales_Visits_Console</name>
     </customApplications>
     <customTabs>
         <label>Cockpit des visites</label>
@@ -135,6 +135,10 @@
     <customLabels>
         <label>2 · Liens CRM</label>
         <name>VC_Workspace_PrepStep2</name>
+    </customLabels>
+    <customLabels>
+        <label>Capture de visite</label>
+        <name>VC_Cockpit_Eyebrow</name>
     </customLabels>
     <customLabels>
         <label>Mon bilan de visites</label>
@@ -345,12 +349,28 @@
         <name>VC_Analytics_LastVisit</name>
     </customLabels>
     <customLabels>
-        <label>Visites capturées</label>
-        <name>VC_EventRelated_Title</name>
+        <label>Préparation de la visite</label>
+        <name>VC_EventVisit_Title</name>
     </customLabels>
     <customLabels>
         <label>Aucune visite liée à cet événement.</label>
-        <name>VC_EventRelated_Empty</name>
+        <name>VC_EventVisit_Empty</name>
+    </customLabels>
+    <customLabels>
+        <label>Préparer cette visite</label>
+        <name>VC_EventVisit_Prepare</name>
+    </customLabels>
+    <customLabels>
+        <label>Ouvrir la visite complète</label>
+        <name>VC_EventVisit_OpenFull</name>
+    </customLabels>
+    <customLabels>
+        <label>Contexte démo</label>
+        <name>VC_EventVisit_DemoSection</name>
+    </customLabels>
+    <customLabels>
+        <label>Brief de visite IA</label>
+        <name>VC_EventVisit_BriefSection</name>
     </customLabels>
     <customLabels>
         <label>Visites récentes</label>

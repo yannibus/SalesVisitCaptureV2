@@ -1,39 +1,80 @@
+:host {
+    display: block;
+    height: 100%;
+}
+
 .vc-queue-card {
     height: 100%;
+    background: var(--slds-g-color-surface-1, #ffffff);
     border: 1px solid var(--slds-g-color-border-1, #e5e5e5);
+    border-radius: 0.75rem;
+    box-shadow: var(--slds-g-shadow-1, 0 1px 2px rgba(15, 23, 42, 0.04));
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
 }
 
 .vc-queue-header {
     display: flex;
     align-items: center;
-    padding: 0.75rem 1rem;
+    gap: 0.625rem;
+    padding: 1rem 1.25rem;
     border-bottom: 1px solid var(--slds-g-color-border-1, #e5e5e5);
-    gap: 0.5rem;
+    background: var(--slds-g-color-surface-1, #ffffff);
+    position: relative;
 }
 
-.vc-queue-header_danger {
-    background: var(--slds-g-color-error-container-1, #fef1ef);
-    color: var(--slds-g-color-error-1, #ba0517);
+.vc-queue-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
 }
 
-.vc-queue-header_warning {
-    background: var(--slds-g-color-warning-container-1, #fff4ec);
-    color: var(--slds-g-color-warning-1, #fe9339);
+.vc-queue-header_danger::before {
+    background: var(--slds-g-color-error-1, #ba0517);
+}
+
+.vc-queue-header_warning::before {
+    background: var(--slds-g-color-warning-1, #fe9339);
+}
+
+.vc-queue-header lightning-icon {
+    --slds-c-icon-color-foreground-default: var(--slds-g-color-neutral-30, #444444);
+}
+
+.vc-queue-header_danger lightning-icon {
+    --slds-c-icon-color-foreground-default: var(--slds-g-color-error-1, #ba0517);
+}
+
+.vc-queue-header_warning lightning-icon {
+    --slds-c-icon-color-foreground-default: var(--slds-g-color-warning-1, #fe9339);
+}
+
+.vc-queue-header h2 {
+    color: var(--slds-g-color-neutral-10, #181818);
+    font-weight: 600;
+    margin: 0;
 }
 
 .vc-queue-count {
     margin-left: auto;
-    background: var(--slds-g-color-surface-1, #ffffff);
+    background: var(--slds-g-color-surface-container-2, #f3f3f3);
     border-radius: var(--slds-g-radius-border-circle, 999px);
     padding: 0.125rem 0.625rem;
     font-weight: 700;
     font-size: 0.8125rem;
-    color: var(--slds-g-color-neutral-10, #032d60);
+    color: var(--slds-g-color-neutral-10, #181818);
+    min-width: 1.75rem;
+    text-align: center;
 }
 
 .vc-queue-body {
-    max-height: 320px;
+    max-height: 360px;
     overflow-y: auto;
+    flex: 1 1 auto;
 }
 
 .vc-queue-list {
@@ -46,8 +87,8 @@
     display: flex;
     align-items: center;
     gap: 0.75rem;
-    padding: 0.75rem 1rem;
-    border-bottom: 1px solid var(--slds-g-color-border-1, #e5e5e5);
+    padding: 0.875rem 1.25rem;
+    border-bottom: 1px solid var(--slds-g-color-border-1, #f0f0f0);
     transition: background-color 120ms ease-out;
 }
 
@@ -56,7 +97,7 @@
 }
 
 .vc-queue-item:hover {
-    background: var(--slds-g-color-surface-container-1, #f3f3f3);
+    background: var(--slds-g-color-surface-container-1, #f8f8f8);
 }
 
 .vc-queue-item-main {
@@ -69,7 +110,7 @@
     align-items: center;
     gap: 0.5rem;
     font-weight: 600;
-    color: var(--slds-g-color-neutral-10, #032d60);
+    color: var(--slds-g-color-neutral-10, #181818);
 }
 
 .vc-queue-item-meta {
@@ -110,4 +151,9 @@
 
 .vc-queue-empty {
     color: var(--slds-g-color-neutral-50, #706e6b);
+    padding: 2rem 1rem;
+}
+
+.vc-queue-empty lightning-icon {
+    --slds-c-icon-color-foreground-default: var(--slds-g-color-success-1, #2e844a);
 }

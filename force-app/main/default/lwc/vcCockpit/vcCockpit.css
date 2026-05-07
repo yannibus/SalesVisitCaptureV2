@@ -1,49 +1,95 @@
-.vc-cockpit-root {
+:host {
+    display: block;
     background: var(--slds-g-color-surface-container-1, #f3f3f3);
+}
+
+.vc-cockpit-root {
     min-height: 100vh;
+    padding-bottom: 2rem;
+}
+
+.vc-shell {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
 }
 
 .vc-header {
     background: var(--slds-g-color-surface-1, #ffffff);
     border-bottom: 1px solid var(--slds-g-color-border-1, #e5e5e5);
+    margin-bottom: 1.25rem;
+}
+
+.vc-header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.25rem 0;
+}
+
+.vc-eyebrow {
+    display: block;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--slds-g-color-brand-base-50, #0176d3);
+    margin-bottom: 0.25rem;
 }
 
 .vc-title {
+    font-size: 1.5rem;
     font-weight: 700;
-    color: var(--slds-g-color-neutral-10, #032d60);
+    color: var(--slds-g-color-neutral-10, #181818);
     letter-spacing: -0.01em;
+    margin: 0;
+    line-height: 1.2;
 }
 
 .vc-subtitle {
     color: var(--slds-g-color-neutral-50, #706e6b);
-    margin-top: 0.25rem;
+    margin: 0.25rem 0 0 0;
+    font-size: 0.875rem;
 }
 
 .vc-period-selector {
-    min-width: 240px;
+    min-width: 220px;
+    flex-shrink: 0;
 }
 
-.vc-layout {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
+.vc-section {
+    margin-bottom: 1.25rem;
 }
 
-.vc-main-pane {
-    width: 100%;
-    min-width: 0;
+.vc-section:last-child {
+    margin-bottom: 0;
+}
+
+.vc-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+}
+
+@media (min-width: 1024px) {
+    .vc-row_two {
+        grid-template-columns: 1fr 1fr;
+    }
 }
 
 .vc-drawer {
-    width: 100%;
     background: var(--slds-g-color-surface-1, #ffffff);
-    border-top: 1px solid var(--slds-g-color-border-1, #e5e5e5);
-    box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.06);
-    animation: vc-slide-up 250ms ease-out;
+    border: 1px solid var(--slds-g-color-border-1, #e5e5e5);
+    border-radius: 0.75rem;
+    box-shadow: var(--slds-g-shadow-3, 0 8px 24px rgba(15, 23, 42, 0.08));
+    margin-top: 1.25rem;
+    overflow: hidden;
+    animation: vc-slide-up 220ms ease-out;
     scroll-margin-top: 1rem;
 }
 
 @keyframes vc-slide-up {
-    from { transform: translateY(16px); opacity: 0; }
+    from { transform: translateY(12px); opacity: 0; }
     to { transform: translateY(0); opacity: 1; }
 }

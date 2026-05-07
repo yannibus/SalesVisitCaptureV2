@@ -1,9 +1,29 @@
 .vc-recent-card {
+    background: var(--slds-g-color-surface-1, #ffffff);
     border: 1px solid var(--slds-g-color-border-1, #e5e5e5);
+    border-radius: 0.75rem;
+    box-shadow: var(--slds-g-shadow-1, 0 1px 2px rgba(15, 23, 42, 0.04));
+    overflow: hidden;
+}
+
+.vc-recent-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid var(--slds-g-color-border-1, #e5e5e5);
+}
+
+.vc-recent-title {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--slds-g-color-neutral-10, #181818);
+    margin: 0;
 }
 
 .vc-muted {
     color: var(--slds-g-color-neutral-50, #706e6b);
+    font-size: 0.75rem;
 }
 
 .vc-table {
@@ -18,20 +38,24 @@
 
 .vc-table thead th {
     text-align: left;
-    padding: 0.5rem 0.75rem;
+    padding: 0.625rem 1rem;
     font-weight: 600;
-    font-size: 0.75rem;
+    font-size: 0.6875rem;
     text-transform: uppercase;
-    letter-spacing: 0.04em;
+    letter-spacing: 0.06em;
     color: var(--slds-g-color-neutral-50, #706e6b);
     border-bottom: 1px solid var(--slds-g-color-border-1, #e5e5e5);
 }
 
 .vc-table tbody td {
-    padding: 0.625rem 0.75rem;
+    padding: 0.75rem 1rem;
     border-bottom: 1px solid var(--slds-g-color-border-1, #f0f0f0);
     color: var(--slds-g-color-neutral-30, #444444);
     vertical-align: middle;
+}
+
+.vc-table tbody tr:last-child td {
+    border-bottom: none;
 }
 
 .vc-table tbody tr:hover {
@@ -40,7 +64,7 @@
 
 .vc-col-strong {
     font-weight: 600;
-    color: var(--slds-g-color-neutral-10, #032d60);
+    color: var(--slds-g-color-neutral-10, #181818);
 }
 
 .vc-col-lang {
@@ -58,6 +82,14 @@
 .vc-row-button {
     padding: 0.25rem 0.75rem;
     font-size: 0.8125rem;
+}
+
+.vc-empty {
+    font-size: 0.8125rem;
+    color: var(--slds-g-color-neutral-50, #706e6b);
+    text-align: center;
+    padding: 2rem 1rem;
+    margin: 0;
 }
 
 .vc-badge {

@@ -1,4 +1,5 @@
 import { LightningElement, track } from 'lwc';
+import VC_Cockpit_Eyebrow from '@salesforce/label/c.VC_Cockpit_Eyebrow';
 import VC_Cockpit_Title from '@salesforce/label/c.VC_Cockpit_Title';
 import VC_Cockpit_Subtitle from '@salesforce/label/c.VC_Cockpit_Subtitle';
 import VC_Cockpit_Period from '@salesforce/label/c.VC_Cockpit_Period';
@@ -18,6 +19,7 @@ export default class VcCockpit extends LightningElement {
     @track refreshKey = 0;
 
     labels = {
+        eyebrow: VC_Cockpit_Eyebrow,
         title: VC_Cockpit_Title,
         subtitle: VC_Cockpit_Subtitle,
         period: VC_Cockpit_Period,

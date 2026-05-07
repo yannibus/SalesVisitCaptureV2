@@ -1,57 +1,61 @@
 <template>
     <div class="vc-cockpit-root">
-        <div class="vc-header slds-p-around_medium slds-grid slds-grid_vertical-align-center slds-grid_align-spread">
-            <div>
-                <h1 class="slds-text-heading_large vc-title">{labels.title}</h1>
-                <p class="slds-text-body_small vc-subtitle">{labels.subtitle}</p>
-            </div>
-            <lightning-combobox
-                name="period"
-                label={labels.period}
-                value={period}
-                options={periodOptions}
-                variant="label-hidden"
-                onchange={handlePeriodChange}
-                class="vc-period-selector">
-            </lightning-combobox>
-        </div>
-
-        <div class={drawerClass}>
-            <div class="vc-main-pane slds-p-around_medium">
-                <c-vc-kpi-strip period={period} refresh-key={refreshKey}></c-vc-kpi-strip>
-
-                <div class="slds-grid slds-gutters slds-wrap slds-m-top_medium">
-                    <div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
-                        <c-vc-action-queue
-                            period={period}
-                            refresh-key={refreshKey}
-                            queue-type="missing-reports"
-                            title={labels.missingReportsTitle}
-                            empty-message={labels.missingReportsEmpty}
-                            onopenvisit={handleOpenVisit}>
-                        </c-vc-action-queue>
-                    </div>
-                    <div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
-                        <c-vc-action-queue
-                            period={period}
-                            refresh-key={refreshKey}
-                            queue-type="missing-plans"
-                            title={labels.missingPlansTitle}
-                            empty-message={labels.missingPlansEmpty}
-                            onopenvisit={handleOpenVisit}>
-                        </c-vc-action-queue>
-                    </div>
+        <header class="vc-header">
+            <div class="vc-shell vc-header-inner">
+                <div>
+                    <span class="vc-eyebrow">{labels.eyebrow}</span>
+                    <h1 class="vc-title">{labels.title}</h1>
+                    <p class="vc-subtitle">{labels.subtitle}</p>
                 </div>
+                <lightning-combobox
+                    name="period"
+                    label={labels.period}
+                    value={period}
+                    options={periodOptions}
+                    variant="label-hidden"
+                    onchange={handlePeriodChange}
+                    class="vc-period-selector">
+                </lightning-combobox>
+            </div>
+        </header>
 
-                <c-vc-analytics period={period} refresh-key={refreshKey} class="slds-m-top_medium"></c-vc-analytics>
+        <div class="vc-shell">
+            <section class="vc-section">
+                <c-vc-kpi-strip period={period} refresh-key={refreshKey}></c-vc-kpi-strip>
+            </section>
 
+            <section class="vc-section">
+                <div class="vc-row vc-row_two">
+                    <c-vc-action-queue
+                        period={period}
+                        refresh-key={refreshKey}
+                        queue-type="missing-reports"
+                        title={labels.missingReportsTitle}
+                        empty-message={labels.missingReportsEmpty}
+                        onopenvisit={handleOpenVisit}>
+                    </c-vc-action-queue>
+                    <c-vc-action-queue
+                        period={period}
+                        refresh-key={refreshKey}
+                        queue-type="missing-plans"
+                        title={labels.missingPlansTitle}
+                        empty-message={labels.missingPlansEmpty}
+                        onopenvisit={handleOpenVisit}>
+                    </c-vc-action-queue>
+                </div>
+            </section>
+
+            <section class="vc-section">
+                <c-vc-analytics period={period} refresh-key={refreshKey}></c-vc-analytics>
+            </section>
+
+            <section class="vc-section">
                 <c-vc-recent-visits
                     period={period}
                     refresh-key={refreshKey}
-                    onopenvisit={handleOpenVisit}
-                    class="slds-m-top_medium">
+                    onopenvisit={handleOpenVisit}>
                 </c-vc-recent-visits>
-            </div>
+            </section>
 
             <template if:true={drawerOpen}>
                 <div class="vc-drawer">

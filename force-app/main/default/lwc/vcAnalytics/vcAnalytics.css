@@ -1,15 +1,72 @@
-.vc-analytics-card {
-    height: 100%;
-    border: 1px solid var(--slds-g-color-border-1, #e5e5e5);
+.vc-analytics {
+    margin: 0;
 }
 
-.vc-muted {
+.vc-analytics > [class*="slds-col"] {
+    margin-bottom: 1.25rem;
+}
+
+@media (min-width: 1024px) {
+    .vc-analytics > [class*="slds-col"] {
+        margin-bottom: 0;
+    }
+}
+
+.vc-analytics-card {
+    height: 100%;
+    background: var(--slds-g-color-surface-1, #ffffff);
+    border: 1px solid var(--slds-g-color-border-1, #e5e5e5);
+    border-radius: 0.75rem;
+    box-shadow: var(--slds-g-shadow-1, 0 1px 2px rgba(15, 23, 42, 0.04));
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.vc-analytics-header {
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid var(--slds-g-color-border-1, #e5e5e5);
+}
+
+.vc-analytics-title {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--slds-g-color-neutral-10, #181818);
+    margin: 0;
+    line-height: 1.3;
+}
+
+.vc-analytics-meta {
+    font-size: 0.75rem;
     color: var(--slds-g-color-neutral-50, #706e6b);
     margin: 0.25rem 0 0 0;
 }
 
+.vc-analytics-meta strong {
+    color: var(--slds-g-color-neutral-10, #181818);
+    font-weight: 700;
+}
+
+.vc-analytics-body {
+    padding: 1.25rem;
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.vc-empty {
+    font-size: 0.8125rem;
+    color: var(--slds-g-color-neutral-50, #706e6b);
+    text-align: center;
+    margin: 1rem 0;
+}
+
 .vc-sparkline {
-    max-height: 120px;
+    color: var(--slds-g-color-brand-base-50, #0176d3);
+    max-height: 140px;
+    width: 100%;
+    display: block;
 }
 
 .vc-donut-wrapper {
@@ -22,16 +79,20 @@
     flex: 0 0 auto;
 }
 
+.vc-donut-track {
+    stroke: var(--slds-g-color-surface-container-2, #ecebea);
+}
+
 .vc-donut-total {
     font-size: 1.5rem;
     font-weight: 700;
-    fill: var(--slds-g-color-neutral-10, #032d60);
+    fill: var(--slds-g-color-neutral-10, #181818);
 }
 
 .vc-donut-label {
     font-size: 0.6875rem;
     fill: var(--slds-g-color-neutral-50, #706e6b);
-    letter-spacing: 0.04em;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
 }
 
@@ -40,6 +101,7 @@
     list-style: none;
     margin: 0;
     padding: 0;
+    min-width: 0;
 }
 
 .vc-legend-item {
@@ -47,8 +109,13 @@
     grid-template-columns: auto 1fr auto;
     align-items: center;
     gap: 0.5rem;
-    padding: 0.25rem 0;
+    padding: 0.3125rem 0;
     font-size: 0.8125rem;
+    border-bottom: 1px solid var(--slds-g-color-border-1, #f0f0f0);
+}
+
+.vc-legend-item:last-child {
+    border-bottom: none;
 }
 
 .vc-legend-dot {
@@ -59,7 +126,7 @@
 }
 
 .vc-legend-label {
-    color: var(--slds-g-color-neutral-10, #032d60);
+    color: var(--slds-g-color-neutral-10, #181818);
     font-weight: 600;
 }
 
@@ -75,31 +142,39 @@
 }
 
 .vc-top-account-item {
-    padding: 0.5rem 0;
+    padding: 0.625rem 0;
     border-bottom: 1px solid var(--slds-g-color-border-1, #f0f0f0);
+}
+
+.vc-top-account-item:first-child {
+    padding-top: 0;
 }
 
 .vc-top-account-item:last-child {
     border-bottom: none;
+    padding-bottom: 0;
 }
 
 .vc-top-account-header {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
-    margin-bottom: 0.25rem;
+    margin-bottom: 0.375rem;
+    gap: 0.75rem;
 }
 
 .vc-top-account-name {
     font-weight: 600;
-    color: var(--slds-g-color-neutral-10, #032d60);
+    color: var(--slds-g-color-neutral-10, #181818);
     font-size: 0.875rem;
+    min-width: 0;
 }
 
 .vc-top-account-count {
     font-weight: 700;
     color: var(--slds-g-color-brand-base-50, #0176d3);
     font-size: 0.9375rem;
+    flex-shrink: 0;
 }
 
 .vc-top-account-bar-track {
@@ -111,12 +186,14 @@
 
 .vc-top-account-bar-fill {
     height: 100%;
-    background: linear-gradient(90deg, var(--slds-g-color-brand-base-50, #0176d3), var(--slds-g-color-brand-base-70, #014486));
+    background: linear-gradient(90deg, var(--slds-g-color-brand-base-50, #0176d3), var(--slds-g-color-brand-base-30, #014486));
     border-radius: var(--slds-g-radius-border-2, 0.25rem);
     transition: width 400ms ease-out;
 }
 
 .vc-top-account-last {
+    display: block;
+    margin-top: 0.25rem;
     font-size: 0.75rem;
     color: var(--slds-g-color-neutral-50, #706e6b);
     font-style: italic;

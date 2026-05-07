@@ -1,47 +1,47 @@
 <template>
     <div class="slds-grid slds-gutters slds-wrap vc-analytics">
         <div class="slds-col slds-size_1-of-1 slds-large-size_5-of-12">
-            <article class="slds-card vc-analytics-card">
-                <div class="slds-card__header slds-p-horizontal_medium slds-p-vertical_small">
-                    <h2 class="slds-text-heading_small">{labels.weeklyTitle}</h2>
-                    <p class="slds-text-body_small vc-muted">{labels.weeklyTotal} <strong>{weeklyTotal}</strong> {labels.visitsWord}</p>
-                </div>
-                <div class="slds-card__body slds-p-around_medium">
+            <article class="vc-analytics-card">
+                <header class="vc-analytics-header">
+                    <h2 class="vc-analytics-title">{labels.weeklyTitle}</h2>
+                    <p class="vc-analytics-meta">{labels.weeklyTotal} <strong>{weeklyTotal}</strong> {labels.visitsWord}</p>
+                </header>
+                <div class="vc-analytics-body">
                     <template if:true={hasWeekly}>
                         <svg width="100%" viewBox="0 0 320 120" preserveAspectRatio="none" class="vc-sparkline">
                             <defs>
                                 <linearGradient id="vcSparkGrad" x1="0" y1="0" x2="0" y2="1">
-                                    <stop offset="0%" stop-color="#0176d3" stop-opacity="0.35"></stop>
-                                    <stop offset="100%" stop-color="#0176d3" stop-opacity="0.02"></stop>
+                                    <stop offset="0%" stop-color="currentColor" stop-opacity="0.32"></stop>
+                                    <stop offset="100%" stop-color="currentColor" stop-opacity="0.02"></stop>
                                 </linearGradient>
                             </defs>
                             <path d={sparklineArea} fill="url(#vcSparkGrad)"></path>
-                            <path d={sparklinePath} fill="none" stroke="#0176d3" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                            <path d={sparklinePath} fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path>
                             <template for:each={sparklineDots} for:item="d">
-                                <circle key={d.key} cx={d.cx} cy={d.cy} r="3" fill="#0176d3">
+                                <circle key={d.key} cx={d.cx} cy={d.cy} r="3.5" fill="currentColor">
                                     <title>{d.label} : {d.count}</title>
                                 </circle>
                             </template>
                         </svg>
                     </template>
                     <template if:false={hasWeekly}>
-                        <p class="slds-text-body_small vc-muted slds-text-align_center slds-p-vertical_medium">{labels.weeklyNoData}</p>
+                        <p class="vc-empty">{labels.weeklyNoData}</p>
                     </template>
                 </div>
             </article>
         </div>
 
         <div class="slds-col slds-size_1-of-1 slds-large-size_3-of-12">
-            <article class="slds-card vc-analytics-card">
-                <div class="slds-card__header slds-p-horizontal_medium slds-p-vertical_small">
-                    <h2 class="slds-text-heading_small">{labels.sourceTitle}</h2>
-                    <p class="slds-text-body_small vc-muted">{labels.weeklyTotal} <strong>{sourceTotal}</strong> {labels.visitsWord}</p>
-                </div>
-                <div class="slds-card__body slds-p-around_medium">
+            <article class="vc-analytics-card">
+                <header class="vc-analytics-header">
+                    <h2 class="vc-analytics-title">{labels.sourceTitle}</h2>
+                    <p class="vc-analytics-meta">{labels.weeklyTotal} <strong>{sourceTotal}</strong> {labels.visitsWord}</p>
+                </header>
+                <div class="vc-analytics-body">
                     <template if:true={hasSource}>
                         <div class="vc-donut-wrapper">
                             <svg width="150" height="150" viewBox="0 0 150 150" class="vc-donut">
-                                <circle cx={donutCx} cy={donutCy} r={donutR} fill="none" stroke="var(--slds-g-color-surface-container-2, #ecebea)" stroke-width="18"></circle>
+                                <circle cx={donutCx} cy={donutCy} r={donutR} fill="none" class="vc-donut-track" stroke-width="18"></circle>
                                 <template for:each={donutSegments} for:item="seg">
                                     <circle
                                         key={seg.key}
@@ -63,7 +63,7 @@
                             <ul class="vc-donut-legend">
                                 <template for:each={donutSegments} for:item="seg">
                                     <li key={seg.key} class="vc-legend-item">
-                                        <span class="vc-legend-dot" style={seg.dotStyle} data-color={seg.color}></span>
+                                        <span class="vc-legend-dot" style={seg.dotStyle}></span>
                                         <span class="vc-legend-label">{seg.label}</span>
                                         <span class="vc-legend-value">{seg.value} ({seg.pct}%)</span>
                                     </li>
@@ -72,18 +72,18 @@
                         </div>
                     </template>
                     <template if:false={hasSource}>
-                        <p class="slds-text-body_small vc-muted slds-text-align_center slds-p-vertical_medium">{labels.sourceNoData}</p>
+                        <p class="vc-empty">{labels.sourceNoData}</p>
                     </template>
                 </div>
             </article>
         </div>
 
         <div class="slds-col slds-size_1-of-1 slds-large-size_4-of-12">
-            <article class="slds-card vc-analytics-card">
-                <div class="slds-card__header slds-p-horizontal_medium slds-p-vertical_small">
-                    <h2 class="slds-text-heading_small">{labels.topTitle}</h2>
-                </div>
-                <div class="slds-card__body slds-p-around_medium">
+            <article class="vc-analytics-card">
+                <header class="vc-analytics-header">
+                    <h2 class="vc-analytics-title">{labels.topTitle}</h2>
+                </header>
+                <div class="vc-analytics-body">
                     <template if:true={hasTopAccounts}>
                         <ul class="vc-top-accounts-list">
                             <template for:each={topAccountsWithWidth} for:item="a">
@@ -101,7 +101,7 @@
                         </ul>
                     </template>
                     <template if:false={hasTopAccounts}>
-                        <p class="slds-text-body_small vc-muted slds-text-align_center slds-p-vertical_medium">{labels.topNoData}</p>
+                        <p class="vc-empty">{labels.topNoData}</p>
                     </template>
                 </div>
             </article>
