@@ -32,8 +32,8 @@ Claude will then run the workflow described below.
    - Inserts 2 `Contact` per account with French names and titles consistent
      with the industry.
    - Inserts 1 `Demo_Context__c` per scenario with:
-     - `Company__c` = seller (e.g. "Atlantem")
-     - `Account_Name__c` = real customer name (e.g. "Bouygues Construction")
+     - `Company__c` = seller (the demo company)
+     - `Account_Name__c` = real customer name from the seller's market
      - `Industry__c` and `Meeting_Type__c` from the picklists
      - `Pain_Points__c`, `Conversation_Hooks__c`, `Objection_Map__c`,
        `Success_Criteria__c`, `Company_Profile__c` **written by Claude**
