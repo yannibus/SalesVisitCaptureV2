@@ -211,20 +211,51 @@ Without this step, opening an Event shows the standard layout and the visit prep
 
 ### 7. Seed demo data (Claude Code only)
 Demo dataset generation lives **outside** the deployable package, under
-`scripts/demo-data/`. To spawn realistic prospects/contacts/events/Demo
-Contexts/Visit Captures for a live demo, run Claude Code in this repo and
-ask it: *seed demo data for `<seller>`*. Claude will:
+`scripts/demo-data/`. To spawn realistic prospects, contacts, events,
+Demo Contexts and Visit Captures for a live demo, run Claude Code in
+this repo and ask:
 
-- ask 3-4 questions (seller, product, target industries, meeting type)
-- WebSearch the seller to anchor on real customers and vocabulary
-- write a one-shot Apex anonymous file under `scripts/demo-data/_runs/`
-- execute it via `sf apex run --file ...`
-- write the AI grounding & visit brief itself (no Prompt Builder runtime
-  dependency)
+> *seed demo data for `<seller>`*
 
-This is intentionally not a clickable LWC — it lives in the SE's tooling, not
-in the package, so customers can install the core product without seeder
-noise. See `scripts/demo-data/README.md` for the full workflow.
+Claude will then:
+
+1. **Interview you** (4 questions max): the seller name, what it sells,
+   target industries, meeting type and number of scenarios.
+2. **Anchor on the seller** via WebSearch (real market customers, sector
+   vocabulary, current concerns). Falls back to general knowledge if
+   WebSearch is unavailable.
+3. **Write a one-shot Apex anonymous file** under
+   `scripts/demo-data/_runs/<timestamp>-<seller>.apex` with bespoke,
+   French-language grounding fields and visit briefs **written directly
+   by Claude** — no Prompt Builder runtime, no Models API quota burnt.
+4. **Run it** via `sf apex run --target-org <alias> --file …` and report
+   the created Ids.
+
+Each scenario produces: 1 customer Account, 2 named Contacts (with
+French names and industry-coherent titles), 1 Demo Context (with
+`Company__c` = seller, `Account_Name__c` = customer + the 5 grounding
+fields filled in), 1 future Event, 1 Visit Capture with an HTML brief.
+
+#### Example
+
+Asking *"seed demo data for Sopra HR — QBR × 3 — they sell HR software
+and want to upsell their new HR Portal"* yields three QBR scenarios at
+plausible Sopra HR customers (a manufacturer, a bank, a public-sector
+agency), each with sector-specific pain points (e.g. ACPR audit for the
+bank, plein-emploi reconversions for the public agency) and an upsell
+angle baked into the visit brief.
+
+#### Why outside the package
+
+- **No Prompt Builder runtime dependency** — bypasses the PR0014 errors
+  that hit metadata-deployed templates.
+- **Per-seller customisation** — every demo gets real market customers
+  and sector-accurate language, not a hardcoded pool.
+- **Distributable package stays clean** — no admin tooling for end
+  customers to wonder about.
+
+See `scripts/demo-data/README.md` for the full workflow and cleanup
+guidance.
 
 ### 8. (Optional) Switch a user to French to test i18n
 Setup → Users → User → **Language = French** → logout/login → all UI strings and AI outputs switch to French seamlessly.
