@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Company__c</fullName>
+    <description>The company that owns the sales rep — the organization for which the demo is being prepared. Distinct from Account_Name__c which is the rep's prospect or customer.</description>
+    <externalId>false</externalId>
+    <label>Company</label>
+    <length>255</length>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

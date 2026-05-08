@@ -32,6 +32,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Demo_Context__c.Company__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Demo_Context__c.Company_Profile__c</field>
         <readable>true</readable>
     </fieldPermissions>

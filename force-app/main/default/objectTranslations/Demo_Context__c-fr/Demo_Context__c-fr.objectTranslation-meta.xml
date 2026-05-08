@@ -9,8 +9,12 @@
         <value>Contextes démo</value>
     </caseValues>
     <fields>
-        <label>Nom de l'entreprise</label>
+        <label>Nom du client</label>
         <name>Account_Name__c</name>
+    </fields>
+    <fields>
+        <label>Société (vendeur)</label>
+        <name>Company__c</name>
     </fields>
     <fields>
         <label>Profil entreprise (IA)</label>

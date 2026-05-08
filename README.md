@@ -209,7 +209,24 @@ But Salesforce never activates a deployed Lightning Record Page automatically. Y
 
 Without this step, opening an Event shows the standard layout and the visit preparation card stays invisible.
 
-### 7. (Optional) Switch a user to French to test i18n
+### 7. Seed demo data (Claude Code only)
+Demo dataset generation lives **outside** the deployable package, under
+`scripts/demo-data/`. To spawn realistic prospects/contacts/events/Demo
+Contexts/Visit Captures for a live demo, run Claude Code in this repo and
+ask it: *seed demo data for `<seller>`*. Claude will:
+
+- ask 3-4 questions (seller, product, target industries, meeting type)
+- WebSearch the seller to anchor on real customers and vocabulary
+- write a one-shot Apex anonymous file under `scripts/demo-data/_runs/`
+- execute it via `sf apex run --file ...`
+- write the AI grounding & visit brief itself (no Prompt Builder runtime
+  dependency)
+
+This is intentionally not a clickable LWC — it lives in the SE's tooling, not
+in the package, so customers can install the core product without seeder
+noise. See `scripts/demo-data/README.md` for the full workflow.
+
+### 8. (Optional) Switch a user to French to test i18n
 Setup → Users → User → **Language = French** → logout/login → all UI strings and AI outputs switch to French seamlessly.
 
 ---

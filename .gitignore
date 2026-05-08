@@ -60,7 +60,10 @@ jest.config.js
 package.json
 package-lock.json
 config/
-scripts/
+scripts/*
+# But: ship the demo-data SE workflow doc (the _runs/ subfolder stays gitignored via scripts/demo-data/.gitignore)
+!scripts/demo-data/
+scripts/demo-data/_runs/
 
 # Project-local agent guidance (not for public repo)
 CLAUDE.md
